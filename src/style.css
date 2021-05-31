@@ -11,7 +11,7 @@ body
 }
 
 .webgl
-{
+{   background-color: aliceblue;
     position: fixed;
     top: 0;
     left: 0;
