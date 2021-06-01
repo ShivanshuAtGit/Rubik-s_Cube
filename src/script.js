@@ -11,7 +11,7 @@ const parameters = {
     color: 0xff0000,
     spin: () =>
     {
-        gsap.to(mesh.rotation, 1, { y: mesh.rotation.y + Math.PI * 2 })
+        gsap.to(topLevel.rotation, 1, { y: topLevel.rotation.y + Math.PI /2  })
     }
 }
 
@@ -38,37 +38,37 @@ const scene = new THREE.Scene()
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ map: texture,color: 0xe5e5ee5 })
-const mesh = new THREE.Group();
-const top1 = new THREE.Group();
 
-// All the 27cube
-const mid = new THREE.Mesh(geometry, material);
+const topLevel = new THREE.Group();
+const midLevel = new THREE.Group();
+const bottomLevel = new THREE.Group();
+
 
 // face  front
 
-const f1 = new THREE.Mesh(geometry, material); f1.position.set(-1,1,1); mesh.add(f1);
-const f2 = new THREE.Mesh(geometry, material); f2.position.set(0,1,1);  mesh.add(f2);
-const f3 = new THREE.Mesh(geometry, material); f3.position.set(1,1,1);  mesh.add(f3);
-const f4 = new THREE.Mesh(geometry, material); f4.position.set(-1,0,1); mesh.add(f4);
-const f5 = new THREE.Mesh(geometry, material); f5.position.set(0,0,1);  mesh.add(f5);
-const f6 = new THREE.Mesh(geometry, material); f6.position.set(1,0,1); mesh.add(f6);
-const f7 = new THREE.Mesh(geometry, material); f7.position.set(-1,-1,1); mesh.add(f7);
-const f8 = new THREE.Mesh(geometry, material); f8.position.set(0,-1,1); mesh.add(f8);
-const f9 = new THREE.Mesh(geometry, material); f9.position.set(1,-1,1); mesh.add(f9);
+const f1 = new THREE.Mesh(geometry, material); f1.position.set(-1,1,1); 
+const f2 = new THREE.Mesh(geometry, material); f2.position.set(0,1,1);  
+const f3 = new THREE.Mesh(geometry, material); f3.position.set(1,1,1);  
+const f4 = new THREE.Mesh(geometry, material); f4.position.set(-1,0,1); 
+const f5 = new THREE.Mesh(geometry, material); f5.position.set(0,0,1);  
+const f6 = new THREE.Mesh(geometry, material); f6.position.set(1,0,1); 
+const f7 = new THREE.Mesh(geometry, material); f7.position.set(-1,-1,1); 
+const f8 = new THREE.Mesh(geometry, material); f8.position.set(0,-1,1); 
+const f9 = new THREE.Mesh(geometry, material); f9.position.set(1,-1,1); 
 
 // mid boxes
 
 const materialMid = new THREE.MeshBasicMaterial({ map: texture,color: 0xe5e5e5 })
 
-const m1 = new THREE.Mesh(geometry, materialMid); m1.position.set(-1,1,0); mesh.add(m1);
-const m2 = new THREE.Mesh(geometry, materialMid); m2.position.set(0,1,0);  mesh.add(m2);
-const m3 = new THREE.Mesh(geometry, materialMid); m3.position.set(1,1,0);  mesh.add(m3);
-const m4 = new THREE.Mesh(geometry, materialMid); m4.position.set(-1,0,0); mesh.add(m4);
-const m5 = new THREE.Mesh(geometry, materialMid); m5.position.set(0,0,0);  mesh.add(m5);
-const m6 = new THREE.Mesh(geometry, materialMid); m6.position.set(1,0,0); mesh.add(m6);
-const m7 = new THREE.Mesh(geometry, materialMid); m7.position.set(-1,-1,0); mesh.add(m7);
-const m8 = new THREE.Mesh(geometry, materialMid); m8.position.set(0,-1,0); mesh.add(m8);
-const m9 = new THREE.Mesh(geometry, materialMid); m9.position.set(1,-1,0); mesh.add(m9);
+const m1 = new THREE.Mesh(geometry, materialMid); m1.position.set(-1,1,0); 
+const m2 = new THREE.Mesh(geometry, materialMid); m2.position.set(0,1,0);  
+const m3 = new THREE.Mesh(geometry, materialMid); m3.position.set(1,1,0);  
+const m4 = new THREE.Mesh(geometry, materialMid); m4.position.set(-1,0,0); 
+const m5 = new THREE.Mesh(geometry, materialMid); m5.position.set(0,0,0);  
+const m6 = new THREE.Mesh(geometry, materialMid); m6.position.set(1,0,0); 
+const m7 = new THREE.Mesh(geometry, materialMid); m7.position.set(-1,-1,0); 
+const m8 = new THREE.Mesh(geometry, materialMid); m8.position.set(0,-1,0); 
+const m9 = new THREE.Mesh(geometry, materialMid); m9.position.set(1,-1,0); 
 
 
 // last set of boxes
@@ -81,34 +81,56 @@ materialLast[3] = new THREE.MeshBasicMaterial({ map: texture, color: 0x11ffff })
 materialLast[4] = new THREE.MeshBasicMaterial({ map: texture, color: 0xffffff })
 materialLast[5] = new THREE.MeshBasicMaterial({ map: texture, color: 0x00ffff })
 
-const l1 = new THREE.Mesh(geometry, materialLast); l1.position.set(-1,1,-1); mesh.add(l1);
-const l2 = new THREE.Mesh(geometry, materialLast); l2.position.set(0,1,-1);  mesh.add(l2);
-const l3 = new THREE.Mesh(geometry, materialLast); l3.position.set(1,1,-1);  mesh.add(l3);
-const l4 = new THREE.Mesh(geometry, materialLast); l4.position.set(-1,0,-1); mesh.add(l4);
-const l5 = new THREE.Mesh(geometry, materialLast); l5.position.set(0,0,-1);  mesh.add(l5);
-const l6 = new THREE.Mesh(geometry, materialLast); l6.position.set(1,0,-1); mesh.add(l6);
-const l7 = new THREE.Mesh(geometry, materialLast); l7.position.set(-1,-1,-1); mesh.add(l7);
-const l8 = new THREE.Mesh(geometry, materialLast); l8.position.set(0,-1,-1); mesh.add(l8);
-const l9 = new THREE.Mesh(geometry, materialLast); l9.position.set(1,-1,-1); mesh.add(l9);
+const l1 = new THREE.Mesh(geometry, materialLast); l1.position.set(-1,1,-1); 
+const l2 = new THREE.Mesh(geometry, materialLast); l2.position.set(0,1,-1);  
+const l3 = new THREE.Mesh(geometry, materialLast); l3.position.set(1,1,-1);  
+const l4 = new THREE.Mesh(geometry, materialLast); l4.position.set(-1,0,-1); 
+const l5 = new THREE.Mesh(geometry, materialLast); l5.position.set(0,0,-1);  
+const l6 = new THREE.Mesh(geometry, materialLast); l6.position.set(1,0,-1); 
+const l7 = new THREE.Mesh(geometry, materialLast); l7.position.set(-1,-1,-1); 
+const l8 = new THREE.Mesh(geometry, materialLast); l8.position.set(0,-1,-1); 
+const l9 = new THREE.Mesh(geometry, materialLast); l9.position.set(1,-1,-1); 
 
 
+/** Top Level Cube Rotation */
+topLevel.add(l1);
+topLevel.add(l2);
+topLevel.add(l3);
+topLevel.add(m1);
+topLevel.add(m2);
+topLevel.add(m3);
+topLevel.add(f1);
+topLevel.add(f2);
+topLevel.add(f3);
 
-top1.add(l1);
-top1.add(l2);
-top1.add(l3);
+/** Mid Level Cube Rotation */
 
-top1.add(m1);
-top1.add(m2);
-top1.add(m3);
+ midLevel.add(l4);
+ midLevel.add(l5);
+ midLevel.add(l6);
+ midLevel.add(m4);
+ midLevel.add(m5);
+ midLevel.add(m6);
+ midLevel.add(f4);
+ midLevel.add(f5);
+ midLevel.add(f6);
 
-top1.add(f1);
-top1.add(f2);
-top1.add(f3);
+/** Bottom Level Rotation */
 
-mesh.add(mid);
+ bottomLevel.add(l7);
+ bottomLevel.add(l8);
+ bottomLevel.add(l9);
+ bottomLevel.add(m7);
+ bottomLevel.add(m8);
+ bottomLevel.add(m9);
+ bottomLevel.add(f7);
+ bottomLevel.add(f8);
+ bottomLevel.add(f9);
 
-scene.add(mesh);
-scene.add(top1);
+
+scene.add(topLevel);
+scene.add(midLevel);
+scene.add(bottomLevel);
 
 /**
  * Sizes
@@ -166,16 +188,16 @@ const gui = new dat.GUI({
     width: 400
 })
 // gui.hide()
-gui.add(mesh.position, 'y').min(- 3).max(3).step(0.01).name('elevation')
-gui.add(mesh, 'visible')
-gui.add(material, 'wireframe')
+// gui.add(topLevel.position, 'y').min(- 3).max(3).step(0.01).name('elevation')
+// gui.add(topLevel, 'visible')
+// gui.add(material, 'wireframe')
 
-gui
-    .addColor(parameters, 'color')
-    .onChange(() =>
-    {
-        material.color.set(parameters.color)
-    })
+// gui
+//     .addColor(parameters, 'color')
+//     .onChange(() =>
+//     {
+//         material.color.set(parameters.color)
+//     })
 
 gui.add(parameters, 'spin')
 
@@ -190,7 +212,7 @@ const tick = () =>
 
     // Update controls
     controls.update()
-    top1.rotation.y +=.01;
+    // topLevel.rotation.y +=.01;
 
     // Render
     renderer.render(scene, camera)
