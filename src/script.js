@@ -8,7 +8,7 @@ import * as dat from 'dat.gui'
  * Base
  */
 const parameters = {
-    color: 0xff0000,
+    // color: 0xff0000,
     spin: () =>
     {
         gsap.to(topLevel.rotation, 1, { y: topLevel.rotation.y + Math.PI /2  })
@@ -37,7 +37,7 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ map: texture,color: 0xe5e5ee5 })
+
 
 const topLevel = new THREE.Group();
 const midLevel = new THREE.Group();
@@ -46,6 +46,7 @@ const bottomLevel = new THREE.Group();
 
 // face  front
 
+const material = new THREE.MeshBasicMaterial({ map: texture,color: 0xe5e5ee5 })
 const f1 = new THREE.Mesh(geometry, material); f1.position.set(-1,1,1); 
 const f2 = new THREE.Mesh(geometry, material); f2.position.set(0,1,1);  
 const f3 = new THREE.Mesh(geometry, material); f3.position.set(1,1,1);  
@@ -187,19 +188,22 @@ const gui = new dat.GUI({
     closed: true,
     width: 400
 })
-// gui.hide()
-// gui.add(topLevel.position, 'y').min(- 3).max(3).step(0.01).name('elevation')
-// gui.add(topLevel, 'visible')
-// gui.add(material, 'wireframe')
-
-// gui
-//     .addColor(parameters, 'color')
-//     .onChange(() =>
-//     {
-//         material.color.set(parameters.color)
-//     })
 
 gui.add(parameters, 'spin')
+/**
+ gui.hide()
+ gui.add(topLevel.position, 'y').min(- 3).max(3).step(0.01).name('elevation')
+ gui.add(topLevel, 'visible')
+ gui.add(material, 'wireframe')
+
+ gui
+     .addColor(parameters, 'color')
+     .onChange(() =>
+     {
+         material.color.set(parameters.color)
+     })
+ */
+
 
 /**
  * Animate
