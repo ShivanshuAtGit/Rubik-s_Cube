@@ -2,20 +2,6 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
-import * as dat from 'dat.gui'
-import { UnsignedShort4444Type } from 'three'
-
-/**
- * Base
- */
-const parameters = {
-    // color: 0xff0000,
-    spin: () =>
-    {
-        gsap.to(f[0].rotation, 1, { y: f[0].rotation.y + Math.PI /2  })
-    }
-}
-
 
 /*
 * texture
@@ -37,6 +23,28 @@ const scene = new THREE.Scene()
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
 
+
+
+
+/**
+ * Faces Color DataStructure
+ */
+
+let frontColor =[]
+let upperColor =[]
+let downColor =[]
+let rightColor =[]
+let leftColor =[]
+let backColor =[]
+
+for(let k=0;k<9;k++){
+    frontColor.push('rgb(255, 255, 255)')
+    upperColor.push('rgb(40, 40, 250)')
+    downColor.push('rgb(2, 175, 2)')
+    rightColor.push('rgb(238, 6, 6)')
+    leftColor.push('rgb(253, 166, 5)')
+    backColor.push('rgb(255, 255, 0)')
+}
 
 
 
@@ -72,15 +80,15 @@ let x=0,y=2,z=1 ;
         if(i%3===0)
           y--;
         
-        //  Front face
+        //  Front layer
         f.push(new THREE.Mesh(geometry, material));
         f[3*i].position.set(x-1,y,z); 
 
-        //  Mid face
+        //  Mid layer
         f.push(new THREE.Mesh(geometry, materialMid));
         f[3*i +1].position.set(x-1,y,z-1); 
 
-        //  Last face
+        //  Last layer
         f.push(new THREE.Mesh(geometry, materialLast));
         f[3*i+2].position.set(x-1,y,z-2); 
 
@@ -415,17 +423,6 @@ renderer.setClearColor( 0x222222, 1 );
 // renderer.setPixelRatio(2)
 
 
-/**
- * Debug
- */
-const gui = new dat.GUI({
-    closed: true,
-    width: 400
-})
-
-gui.add(parameters, 'spin')
-
-
 
 /**
  * Animate
@@ -438,7 +435,6 @@ const tick = () =>
 
     // Update controls
     controls.update()
-    // topLevel.rotation.y +=.01;
 
     // Render
     renderer.render(scene, camera)
