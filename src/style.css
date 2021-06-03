@@ -10,10 +10,22 @@ body
     overflow: hidden;
 }
 
+.wrapper{
+    display: flex;
+}
+
 .webgl
-{   background-color: aliceblue;
-    position: fixed;
+{   
+    /* position: fixed;
     top: 0;
-    left: 0;
+    left: 0; */
     outline: none;
+    width: 70%;
+}
+
+.events_box{
+    position: fixed;
+    top: 30px;
+    right: 0;
+    width: 30%;
 }

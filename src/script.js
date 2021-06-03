@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
 import * as dat from 'dat.gui'
+import { UnsignedShort4444Type } from 'three'
 
 /**
  * Base
@@ -11,7 +12,7 @@ const parameters = {
     // color: 0xff0000,
     spin: () =>
     {
-        gsap.to(topLevel.rotation, 1, { y: topLevel.rotation.y + Math.PI /2  })
+        gsap.to(f[0].rotation, 1, { y: f[0].rotation.y + Math.PI /2  })
     }
 }
 
@@ -22,8 +23,6 @@ const parameters = {
 
 const textureLoader = new THREE.TextureLoader();
 const texture = textureLoader.load('/textures/pegatinaColor.png')
-
-console.log(texture)
 
 
 // Canvas
@@ -39,112 +38,345 @@ const scene = new THREE.Scene()
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
 
 
-const topLevel = new THREE.Group();
-const midLevel = new THREE.Group();
-const bottomLevel = new THREE.Group();
 
 
-// face  front
+/**
+ * Color Buider
+ */
+
+
+// materialLast[0] = new THREE.MeshBasicMaterial({ map: texture, color: 0xff0000 })
+// materialLast[1] = new THREE.MeshBasicMaterial({ map: texture, color: 0x00ff00 })
+// materialLast[2] = new THREE.MeshBasicMaterial({ map: texture, color: 0x0000ff })
+// materialLast[3] = new THREE.MeshBasicMaterial({ map: texture, color: 0x11ffff })
+// materialLast[4] = new THREE.MeshBasicMaterial({ map: texture, color: 0xffffff })
+// materialLast[5] = new THREE.MeshBasicMaterial({ map: texture, color: 0x00ffff })
+
+
+
+
+
+
+// faces
 
 const material = new THREE.MeshBasicMaterial({ map: texture,color: 0xe5e5ee5 })
-const f1 = new THREE.Mesh(geometry, material); f1.position.set(-1,1,1); 
-const f2 = new THREE.Mesh(geometry, material); f2.position.set(0,1,1);  
-const f3 = new THREE.Mesh(geometry, material); f3.position.set(1,1,1);  
-const f4 = new THREE.Mesh(geometry, material); f4.position.set(-1,0,1); 
-const f5 = new THREE.Mesh(geometry, material); f5.position.set(0,0,1);  
-const f6 = new THREE.Mesh(geometry, material); f6.position.set(1,0,1); 
-const f7 = new THREE.Mesh(geometry, material); f7.position.set(-1,-1,1); 
-const f8 = new THREE.Mesh(geometry, material); f8.position.set(0,-1,1); 
-const f9 = new THREE.Mesh(geometry, material); f9.position.set(1,-1,1); 
-
-// mid boxes
-
 const materialMid = new THREE.MeshBasicMaterial({ map: texture,color: 0xe5e5e5 })
-
-const m1 = new THREE.Mesh(geometry, materialMid); m1.position.set(-1,1,0); 
-const m2 = new THREE.Mesh(geometry, materialMid); m2.position.set(0,1,0);  
-const m3 = new THREE.Mesh(geometry, materialMid); m3.position.set(1,1,0);  
-const m4 = new THREE.Mesh(geometry, materialMid); m4.position.set(-1,0,0); 
-const m5 = new THREE.Mesh(geometry, materialMid); m5.position.set(0,0,0);  
-const m6 = new THREE.Mesh(geometry, materialMid); m6.position.set(1,0,0); 
-const m7 = new THREE.Mesh(geometry, materialMid); m7.position.set(-1,-1,0); 
-const m8 = new THREE.Mesh(geometry, materialMid); m8.position.set(0,-1,0); 
-const m9 = new THREE.Mesh(geometry, materialMid); m9.position.set(1,-1,0); 
+const materialLast =new THREE.MeshBasicMaterial({ map: texture, color: 0xff0000 });
 
 
-// last set of boxes
-
-const materialLast =[];
-materialLast[0] = new THREE.MeshBasicMaterial({ map: texture, color: 0xff0000 })
-materialLast[1] = new THREE.MeshBasicMaterial({ map: texture, color: 0x00ff00 })
-materialLast[2] = new THREE.MeshBasicMaterial({ map: texture, color: 0x0000ff })
-materialLast[3] = new THREE.MeshBasicMaterial({ map: texture, color: 0x11ffff })
-materialLast[4] = new THREE.MeshBasicMaterial({ map: texture, color: 0xffffff })
-materialLast[5] = new THREE.MeshBasicMaterial({ map: texture, color: 0x00ffff })
-
-const l1 = new THREE.Mesh(geometry, materialLast); l1.position.set(-1,1,-1); 
-const l2 = new THREE.Mesh(geometry, materialLast); l2.position.set(0,1,-1);  
-const l3 = new THREE.Mesh(geometry, materialLast); l3.position.set(1,1,-1);  
-const l4 = new THREE.Mesh(geometry, materialLast); l4.position.set(-1,0,-1); 
-const l5 = new THREE.Mesh(geometry, materialLast); l5.position.set(0,0,-1);  
-const l6 = new THREE.Mesh(geometry, materialLast); l6.position.set(1,0,-1); 
-const l7 = new THREE.Mesh(geometry, materialLast); l7.position.set(-1,-1,-1); 
-const l8 = new THREE.Mesh(geometry, materialLast); l8.position.set(0,-1,-1); 
-const l9 = new THREE.Mesh(geometry, materialLast); l9.position.set(1,-1,-1); 
+const f = [], vector =[];
+let x=0,y=2,z=1 ;    
 
 
-/** Top Level Cube Rotation */
-topLevel.add(l1);
-topLevel.add(l2);
-topLevel.add(l3);
-topLevel.add(m1);
-topLevel.add(m2);
-topLevel.add(m3);
-topLevel.add(f1);
-topLevel.add(f2);
-topLevel.add(f3);
+    for(let i=0;i<9;i++){
+        if(i%3===0)
+          y--;
+        
+        //  Front face
+        f.push(new THREE.Mesh(geometry, material));
+        f[3*i].position.set(x-1,y,z); 
 
-/** Mid Level Cube Rotation */
+        //  Mid face
+        f.push(new THREE.Mesh(geometry, materialMid));
+        f[3*i +1].position.set(x-1,y,z-1); 
 
- midLevel.add(l4);
- midLevel.add(l5);
- midLevel.add(l6);
- midLevel.add(m4);
- midLevel.add(m5);
- midLevel.add(m6);
- midLevel.add(f4);
- midLevel.add(f5);
- midLevel.add(f6);
+        //  Last face
+        f.push(new THREE.Mesh(geometry, materialLast));
+        f[3*i+2].position.set(x-1,y,z-2); 
 
-/** Bottom Level Rotation */
+        vector.push( new THREE.Vector3(x-1,y,z));
+        vector.push( new THREE.Vector3(x-1,y,z-1));
+        vector.push( new THREE.Vector3(x-1,y,z-2));
 
- bottomLevel.add(l7);
- bottomLevel.add(l8);
- bottomLevel.add(l9);
- bottomLevel.add(m7);
- bottomLevel.add(m8);
- bottomLevel.add(m9);
- bottomLevel.add(f7);
- bottomLevel.add(f8);
- bottomLevel.add(f9);
+        scene.add(f[3*i]);
+        scene.add(f[3*i+1]);
+        scene.add(f[3*i+2])
+        
+        x = (x+1)%3;
+      
+    }
 
 
-scene.add(topLevel);
-scene.add(midLevel);
-scene.add(bottomLevel);
+
+// 
+
+/**
+ * Event Listener
+ */
+
+
+//  U  Rotation
+ document.getElementById('U').addEventListener('click',()=>{
+    const mesh = new THREE.Group();
+     let uRot =[]
+    
+   
+    for(let i=0;i<27;i++){
+        scene.updateMatrixWorld(true);
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition(f[i].matrixWorld)
+        
+        for(let j=0;j<9;j++){
+            if(Math.round(position.x) === vector[j].x && Math.round(position.y) === vector[j].y && Math.round(position.z) === vector[j].z){
+                uRot.push(i);
+            }
+        }
+    }
+
+    uRot.forEach(element => {
+        mesh.add(f[element]);
+    });
+
+    scene.add(mesh);
+    
+    gsap.to(mesh.rotation, 1, { y: mesh.rotation.y - Math.PI /2  })
+    
+    setTimeout(()=>{
+
+        f.forEach((element) => {
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            element.position.copy(position1.setFromMatrixPosition(element.matrixWorld));
+            scene.add(element);
+            console.log(element)
+        });
+        scene.updateMatrixWorld(true);
+
+    },1250)
+  
+})
+
+
+//  D  Rotation
+
+document.getElementById('D').addEventListener('click',()=>{
+    const mesh = new THREE.Group();
+     let uRot =[]
+    
+   
+    for(let i=0;i<27;i++){
+        scene.updateMatrixWorld(true);
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition(f[i].matrixWorld)
+        
+        for(let j=18;j<27;j++){
+            if(Math.round(position.x) === vector[j].x && Math.round(position.y) === vector[j].y && Math.round(position.z) === vector[j].z){
+                uRot.push(i);
+            }
+        }
+    }
+
+    uRot.forEach(element => {
+        mesh.add(f[element]);
+    });
+
+    scene.add(mesh);
+    
+    gsap.to(mesh.rotation, 1, { y: mesh.rotation.y + Math.PI /2  })
+    
+    setTimeout(()=>{
+
+        f.forEach((element) => {
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            element.position.copy(position1.setFromMatrixPosition(element.matrixWorld));
+            scene.add(element);
+            console.log(element)
+        });
+        scene.updateMatrixWorld(true);
+
+    },1250)
+  
+})
+
+//  F  Rotation
+
+document.getElementById('F').addEventListener('click',()=>{
+    const mesh = new THREE.Group();
+     let uRot =[]
+    
+   
+    for(let i=0;i<27;i++){
+        scene.updateMatrixWorld(true);
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition(f[i].matrixWorld)
+        
+        for(let j=0;j<9;j++){
+            if(Math.round(position.x) === vector[3*j].x && Math.round(position.y) === vector[3*j].y && Math.round(position.z) === vector[3*j].z){
+                uRot.push(i);
+            }
+        }
+    }
+
+    uRot.forEach(element => {
+        mesh.add(f[element]);
+    });
+
+    scene.add(mesh);
+    
+    gsap.to(mesh.rotation, 1, { z: mesh.rotation.z - Math.PI /2  })
+    
+    setTimeout(()=>{
+
+        f.forEach((element) => {
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            element.position.copy(position1.setFromMatrixPosition(element.matrixWorld));
+            scene.add(element);
+            console.log(element)
+        });
+        scene.updateMatrixWorld(true);
+
+    },1250)
+  
+})
+
+
+// B rotation
+
+document.getElementById('B').addEventListener('click',()=>{
+    const mesh = new THREE.Group();
+     let uRot =[]
+    
+   
+    for(let i=0;i<27;i++){
+        scene.updateMatrixWorld(true);
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition(f[i].matrixWorld)
+        
+        for(let j=2;j<27;j=j+3){
+            if(Math.round(position.x) === vector[j].x && Math.round(position.y) === vector[j].y && Math.round(position.z) === vector[j].z){
+                uRot.push(i);
+            }
+        }
+    }
+
+    uRot.forEach(element => {
+        mesh.add(f[element]);
+    });
+
+    scene.add(mesh);
+    
+    gsap.to(mesh.rotation, 1, { z: mesh.rotation.z + Math.PI /2  })
+    
+    setTimeout(()=>{
+
+        f.forEach((element) => {
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            element.position.copy(position1.setFromMatrixPosition(element.matrixWorld));
+            scene.add(element);
+            console.log(element)
+        });
+        scene.updateMatrixWorld(true);
+
+    },1250)
+  
+})
+
+// L rotation
+
+document.getElementById('L').addEventListener('click',()=>{
+    const mesh = new THREE.Group();
+     let uRot =[]
+    
+   
+    for(let i=0;i<27;i++){
+        scene.updateMatrixWorld(true);
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition(f[i].matrixWorld)
+        
+        for(let j=0;j<27;j++){
+        if(j<3 || j>=9 && j<12 || j>=18 && j<21)
+            if(Math.round(position.x) === vector[j].x && Math.round(position.y) === vector[j].y && Math.round(position.z) === vector[j].z){
+                uRot.push(i);
+            }
+        }
+    }
+
+    uRot.forEach(element => {
+        mesh.add(f[element]);
+    });
+
+    scene.add(mesh);
+    
+    gsap.to(mesh.rotation, 1, { x: mesh.rotation.x + Math.PI /2  })
+    
+    setTimeout(()=>{
+
+        f.forEach((element) => {
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            element.position.copy(position1.setFromMatrixPosition(element.matrixWorld));
+            scene.add(element);
+            console.log(element)
+        });
+        scene.updateMatrixWorld(true);
+
+    },1250)
+  
+})
+
+// R rotation
+
+document.getElementById('R').addEventListener('click',()=>{
+    const mesh = new THREE.Group();
+     let uRot =[]
+    
+   
+    for(let i=0;i<27;i++){
+        scene.updateMatrixWorld(true);
+        let position = new THREE.Vector3();
+        position.setFromMatrixPosition(f[i].matrixWorld)
+        
+        for(let j=0;j<27;j++){
+        if(j>=6 &&j<9 || j>=15 && j<18 || j>=24 && j<27)
+            if(Math.round(position.x) === vector[j].x && Math.round(position.y) === vector[j].y && Math.round(position.z) === vector[j].z){
+                uRot.push(i);
+            }
+        }
+    }
+
+    uRot.forEach(element => {
+        mesh.add(f[element]);
+    });
+
+    scene.add(mesh);
+    
+    gsap.to(mesh.rotation, 1, { x: mesh.rotation.x - Math.PI /2  })
+    
+    setTimeout(()=>{
+
+        f.forEach((element) => {
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            element.position.copy(position1.setFromMatrixPosition(element.matrixWorld));
+            scene.add(element);
+            console.log(element)
+        });
+        scene.updateMatrixWorld(true);
+
+    },1250)
+  
+})
+
+
+
+
+
 
 /**
  * Sizes
  */
 const sizes = {
-    width: window.innerWidth,
+    width: window.innerWidth*0.7,
     height: window.innerHeight
 }
 
 window.addEventListener('resize', () =>
 {
     // Update sizes
-    sizes.width = window.innerWidth
+    sizes.width = window.innerWidth*0.7
     sizes.height = window.innerHeight
 
     // Update camera
@@ -155,6 +387,7 @@ window.addEventListener('resize', () =>
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
+
 
 /**
  * Camera
@@ -167,6 +400,7 @@ scene.add(camera)
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+
 
 /**
  * Renderer
@@ -190,19 +424,7 @@ const gui = new dat.GUI({
 })
 
 gui.add(parameters, 'spin')
-/**
- gui.hide()
- gui.add(topLevel.position, 'y').min(- 3).max(3).step(0.01).name('elevation')
- gui.add(topLevel, 'visible')
- gui.add(material, 'wireframe')
 
- gui
-     .addColor(parameters, 'color')
-     .onChange(() =>
-     {
-         material.color.set(parameters.color)
-     })
- */
 
 
 /**
