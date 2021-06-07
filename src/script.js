@@ -1471,13 +1471,13 @@ document.querySelectorAll('.button')[17].addEventListener('click', handleDisable
  * Sizes
  */
 const sizes = {
-    width: window.innerWidth * 0.7,
+    width: window.innerWidth ,
     height: window.innerHeight
 }
 
 window.addEventListener('resize', () => {
     // Update sizes
-    sizes.width = window.innerWidth * 0.7
+    sizes.width = window.innerWidth 
     sizes.height = window.innerHeight
 
     // Update camera
