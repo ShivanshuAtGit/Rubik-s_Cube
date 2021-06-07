@@ -11,6 +11,13 @@ import gsap from 'gsap'
 const textureLoader = new THREE.TextureLoader();
 const texture = textureLoader.load('/textures/pegatinaColor.png')
 
+/**
+ * Audio
+ */
+
+// const rotateAudio = new Audio('/Audio/rub-pull-1.mp3');
+
+
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -23,12 +30,7 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-// const geometryPlane = new THREE.PlaneGeometry( 100,100 );
-// const materialPlane = new THREE.MeshStandardMaterial({metalness: 1, roughness:.6, map: texture, color: 0xe5e5e5 , side : THREE.DoubleSide })
-// const plane = new THREE.Mesh( geometryPlane, materialPlane );
-// plane.position.set(0,-30,0)
-// plane.rotation.x += Math.PI/2
-// scene.add( plane );
+
 
 
 /**
@@ -486,6 +488,7 @@ let uRotation= () => {
     scene.add(mesh);
 
     gsap.to(mesh.rotation, 1, { y: mesh.rotation.y - Math.PI / 2 })
+    // rotateAudio.play();
 
     setTimeout(() => {
 
@@ -1491,14 +1494,11 @@ window.addEventListener('resize', () => {
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(55, sizes.width / sizes.height, .45, 300)
 camera.position.z = 8
 camera.position.y = 5
 scene.add(camera)
 
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
 
 
 /**
@@ -1512,6 +1512,18 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor(0x222222, 1);
 // renderer.setPixelRatio(2)
+
+
+// Controls
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
+ controls.minDistance = 3;
+controls.maxDistance = 40;
+
+ 
+/**
+ * Lights
+ */        
 
 const light = new THREE.AmbientLight(0xffffff, 1)
 scene.add(light)
@@ -1544,6 +1556,33 @@ const light6 = new THREE.DirectionalLight( 0xffffff, 1);
 light6.position.set( 0,-8,0 );
 light6.lookAt(new THREE.Vector3(0,0,0))
 scene.add( light6 );
+
+
+/**
+ * Skybox
+ */
+
+ let materialArray = [];
+ let texture_ft = new THREE.TextureLoader().load( '/textures/skyhsky_ft.png');
+ let texture_bk = new THREE.TextureLoader().load( '/textures/skyhsky_bk.png');
+ let texture_up = new THREE.TextureLoader().load( '/textures/skyhsky_up.png');
+ let texture_dn = new THREE.TextureLoader().load( '/textures/skyhsky_dn.png');
+ let texture_rt = new THREE.TextureLoader().load( '/textures/skyhsky_rt.png');
+ let texture_lf = new THREE.TextureLoader().load( '/textures/skyhsky_lf.png');
+   
+ materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft }));
+ materialArray.push(new THREE.MeshBasicMaterial( { map: texture_bk }));
+ materialArray.push(new THREE.MeshBasicMaterial( { map: texture_up }));
+ materialArray.push(new THREE.MeshBasicMaterial( { map: texture_dn }));
+ materialArray.push(new THREE.MeshBasicMaterial( { map: texture_rt }));
+ materialArray.push(new THREE.MeshBasicMaterial( { map: texture_lf }));
+    
+ for (let i = 0; i < 6; i++)
+   materialArray[i].side = THREE.BackSide;
+    
+ let skyboxGeo = new THREE.BoxGeometry( 100, 100, 100);
+ let skybox = new THREE.Mesh( skyboxGeo, materialArray );
+ scene.add( skybox );
 
 /**
  * Animate
