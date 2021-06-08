@@ -17,9 +17,6 @@ body
 
 .webgl
 {   
-    /* position: fixed;
-    top: 0;
-    left: 0; */
     outline: none;
     width: 100%;
 }
@@ -27,25 +24,46 @@ body
 .left_box{
     position: fixed;
     top: 0px;
-    left: 0;
-    width: 30%;
-    background-color: black;
-    color: white;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.068);
+    color: rgb(51, 51, 51);
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .right_box{
     position: fixed;
-    top: 10vh;
+    top: 20vh;
     right: 0;
     height: 70vh;
     width: 30vw;
     border-radius: 2rem 0 0 2rem;
-    background-color: rgba(255, 255, 255, 0.644);
+    background-color: rgba(201, 201, 201, 0.089);
+    overflow-y: auto;
+    text-align: center;
+}
 
+.right_box h1{
+    display: inline-block;
+    padding: 1rem;
+    margin: 1rem 0 ;
+    color: rgb(51, 51, 51);
+    text-shadow: 0 0 1rem rgb(255, 255, 255);
+}
+
+.button_wrapper{
+    padding: 1rem;
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.096);
+    border-radius: 2rem;
+    margin: 1rem .5rem;
+    background-color: rgba(66, 66, 66, 0.233);;
 }
 
 .button{
-    margin: 1rem;
+    margin: .2rem;
     text-align: center;
     height: 2rem;
     width: 3rem;
@@ -53,7 +71,9 @@ body
     border-radius: 1rem;
     border: none;
     background-color: rgb(0, 0, 0);
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.582);
+    box-shadow: 
+        8px 8px 10px 0 rgba(255, 255, 255, 0.3) inset,
+        -6px -6px 8px 0 rgba(0, 0, 0, .25) inset;
     color: white;
     text-shadow: 0 0 1rem white;
     transition: all 100ms ease-out;
