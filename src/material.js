@@ -1,40 +1,6 @@
 import * as THREE from 'three'
-
-
-/**
- * Faces Color DataStructure
- */
-
- let frontColor = []
- let upperColor = []
- let downColor = []
- let rightColor = []
- let leftColor = []
- let backColor = []
- 
- let red = '#c01629';
- let white = '#dae8e8';
- let yellow = '#dbb60d';
- let orange =  '#e95608';
- let green = '#027414';
- let blue = '#053c99';
- 
- for (let k = 0; k < 9; k++) {
-     frontColor.push(white)
-     upperColor.push(blue)
-     downColor.push(green)
-     rightColor.push(red)
-     leftColor.push(orange)
-     backColor.push(yellow)
- }
-
-
-/*
-* texture
-*/
-
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load('/textures/pegatinaColor.png')
+import {frontColor , upperColor, downColor , rightColor,leftColor , backColor} from './phaseColors'
+import {texture} from './textures'
 
 
 /**

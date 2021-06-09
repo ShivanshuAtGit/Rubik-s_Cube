@@ -3,15 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
 import material from './material'
-
-
-
-/**
- * Audio
- */
-
-// const rotateAudio = new Audio('/Audio/rub-pull-1.mp3');
-
+import {skybox} from './textures'
 
 
 // Canvas
@@ -22,87 +14,13 @@ const scene = new THREE.Scene()
 
 
 /**
- * Object
+ * geometry
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
 
 
 
-
-/**
- * Debug
- */
-
-// frontColor[0] = blue;
-// frontColor[1] = green;
-// frontColor[2] = orange;
-// frontColor[3] = blue;
-// frontColor[4] = white;
-// frontColor[5] = white;
-// frontColor[6] = orange;
-// frontColor[7] = red;
-// frontColor[8] = white;
-
-// backColor[0] = blue;
-// backColor[1] = red;
-// backColor[2] = orange;
-// backColor[3] = white;
-// backColor[4] = yellow;
-// backColor[5] = blue;
-// backColor[6] = red;
-// backColor[7] = orange;
-// backColor[8] = green;
-
-
-// leftColor[0] = yellow;
-// leftColor[1] = green;
-// leftColor[2] = yellow;
-// leftColor[3] = orange;
-// leftColor[4] = orange;
-// leftColor[5] = yellow;
-// leftColor[6] = red;
-// leftColor[7] = green;
-// leftColor[8] = green;
-
-// rightColor[0] = blue;
-// rightColor[1] = red;
-// rightColor[2] = white;
-// rightColor[3] = orange;
-// rightColor[4] = red;
-// rightColor[5] = blue;
-// rightColor[6] = red;
-// rightColor[7] = orange;
-// rightColor[8] = blue;
-
-// upperColor[0] = green;
-// upperColor[1] = yellow;
-// upperColor[2] = orange;
-// upperColor[3] = yellow;
-// upperColor[4] = blue;
-// upperColor[5] = white;
-// upperColor[6] = red;
-// upperColor[7] = red;
-// upperColor[8] = yellow;
-
-// downColor[0] = white;
-// downColor[1] = blue;
-// downColor[2] = green;
-// downColor[3] = white;
-// downColor[4] = green;
-// downColor[5] = green;
-// downColor[6] = yellow;
-// downColor[7] = yellow;
-// downColor[8] = white;
-
-
-
-
-
-
-
-
 // faces
-
 
 const f = [], vector = [];
 let x = 0, y = 2, z = 1;
@@ -168,7 +86,6 @@ let uRotation= () => {
     scene.add(mesh);
 
     gsap.to(mesh.rotation, 1, { y: mesh.rotation.y - Math.PI / 2 })
-    // rotateAudio.play();
 
     setTimeout(() => {
 
@@ -1243,26 +1160,6 @@ scene.add( light6 );
  * Skybox
  */
 
- let materialArray = [];
- let texture_ft = new THREE.TextureLoader().load( '/textures/exosystem_ft.jpg');
- let texture_bk = new THREE.TextureLoader().load( '/textures/exosystem_bk.jpg');
- let texture_up = new THREE.TextureLoader().load( '/textures/exosystem_up.jpg');
- let texture_dn = new THREE.TextureLoader().load( '/textures/exosystem_dn.jpg');
- let texture_rt = new THREE.TextureLoader().load( '/textures/exosystem_rt.jpg');
- let texture_lf = new THREE.TextureLoader().load( '/textures/exosystem_lf.jpg');
-   
- materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft }));
- materialArray.push(new THREE.MeshBasicMaterial( { map: texture_bk }));
- materialArray.push(new THREE.MeshBasicMaterial( { map: texture_up }));
- materialArray.push(new THREE.MeshBasicMaterial( { map: texture_dn }));
- materialArray.push(new THREE.MeshBasicMaterial( { map: texture_rt }));
- materialArray.push(new THREE.MeshBasicMaterial( { map: texture_lf }));
-    
- for (let i = 0; i < 6; i++)
-   materialArray[i].side = THREE.BackSide;
-    
- let skyboxGeo = new THREE.BoxGeometry( 100, 100, 100);
- let skybox = new THREE.Mesh( skyboxGeo, materialArray );
  scene.add( skybox );
 
 /**
