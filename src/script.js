@@ -1132,34 +1132,28 @@ scene.add( directionalLight1 );
 
 const light2 = new THREE.DirectionalLight( 0xffffff, 1);
 light2.position.set( -8,0,0 );
-light2.lookAt(new THREE.Vector3(0,0,0))
 scene.add( light2 );
 
 const light3 = new THREE.DirectionalLight( 0xffffff, 1);
 light3.position.set( 8,0,0 );
-light3.lookAt(new THREE.Vector3(0,0,0))
 scene.add( light3 );
 
 const light4 = new THREE.DirectionalLight( 0xffffff, 1);
 light4.position.set( 0,0,-8 );
-light4.lookAt(new THREE.Vector3(0,0,0))
 scene.add( light4 );
 
 const light5 = new THREE.DirectionalLight( 0xffffff, 1);
 light5.position.set( 0,8,0 );
-light5.lookAt(new THREE.Vector3(0,0,0))
 scene.add( light5 );
 
 const light6 = new THREE.DirectionalLight( 0xffffff, 1);
 light6.position.set( 0,-8,0 );
-light6.lookAt(new THREE.Vector3(0,0,0))
 scene.add( light6 );
 
 
 /**
  * Skybox
  */
-
  scene.add( skybox );
 
 /**
