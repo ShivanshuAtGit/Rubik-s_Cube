@@ -31,8 +31,8 @@ let callShuffle =() =>{
     for(var i=0 ; i<val ;i++){
         let index = Math.round(Math.random() * 6);
         setTimeout(()=>{
-            allRotation[index](.1,110);
-        },200*i)
+            allRotation[index](.1,200);
+        },300*i)
     }
 
     setTimeout(()=>{
@@ -42,7 +42,7 @@ let callShuffle =() =>{
             modal.classList.toggle('load_none')
             modal.classList.toggle('none')
         },1000)
-    },200*i)
+    },310*i)
 }
 
 /** Button Disabled */
