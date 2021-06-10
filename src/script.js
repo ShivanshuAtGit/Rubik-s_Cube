@@ -20,8 +20,7 @@ let allRotation = [uRotation , dRotation , fRotation ,bRotation, lRotation ,rRot
     uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation];
 
 let callShuffle =() =>{
-    let modal = document.querySelector('.shuffle_modal');
-    modal.classList.toggle('none')
+    
     
     let min = 5;
     let max = 13;
@@ -32,7 +31,7 @@ let callShuffle =() =>{
         let index = Math.round(Math.random() * 6);
         setTimeout(()=>{
             allRotation[index](.1,200);
-        },300*i)
+        },400*i)
     }
 
     setTimeout(()=>{
@@ -42,7 +41,7 @@ let callShuffle =() =>{
             modal.classList.toggle('load_none')
             modal.classList.toggle('none')
         },1000)
-    },310*i)
+    },410*i+500)
 }
 
 /** Button Disabled */
@@ -129,6 +128,7 @@ let page3 = document.querySelector('.page3');
 let play = document.querySelector('.play');
 let shuffle = document.querySelector('.shuffle');
 let reshuffle = document.querySelector('.reshuffle');
+let modal = document.querySelector('.shuffle_modal');
 
 play.addEventListener('click',()=>{
     page1.classList.toggle('none')
@@ -139,12 +139,21 @@ shuffle.addEventListener('click',()=>{
     page2.classList.toggle('none')
     page3.classList.toggle('none')
 
-    callShuffle();
+    modal.classList.toggle('none')
+
+    setTimeout(()=>{
+        callShuffle();
+    },500)
+    
 })
 
 reshuffle.addEventListener('click',()=>{
 
-    callShuffle();
+    modal.classList.toggle('none')
+    
+    setTimeout(()=>{
+        callShuffle();
+    },500)
 })
 
 
