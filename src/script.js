@@ -60,6 +60,34 @@ for (let i = 0; i < 9; i++) {
  * Event Listener
  */
 
+function gsapRotation(meshElement,dur ,rot){
+    gsap.to(meshElement.rotation, dur ,rot)
+}
+
+function fixMatrix(dur){
+    setTimeout(() => {
+
+        f.forEach((element) => {
+
+            let quaternion = new THREE.Quaternion();
+            scene.updateMatrixWorld(true);
+            quaternion.setFromRotationMatrix(element.matrixWorld);
+            element.quaternion.copy(quaternion);
+
+
+            let position1 = new THREE.Vector3();
+            scene.updateMatrixWorld(true);
+            position1.setFromMatrixPosition(element.matrixWorld)
+            element.position.copy(position1);
+
+            scene.add(element);
+
+        });
+        scene.updateMatrixWorld(true);
+
+    }, dur)
+}
+
 
 //  U  Rotation
 let uRotation= () => {
@@ -84,36 +112,13 @@ let uRotation= () => {
     });
 
     scene.add(mesh);
-
-    gsap.to(mesh.rotation, 1, { y: mesh.rotation.y - Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { y: mesh.rotation.y - Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
 
 //  D  Rotation
-
 let dRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -137,33 +142,12 @@ let dRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { y: mesh.rotation.y + Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { y: mesh.rotation.y + Math.PI / 2 });
+    fixMatrix(1250);
 }
 
-//  F  Rotation
 
+//  F  Rotation
 let fRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -186,35 +170,13 @@ let fRotation= () => {
     });
 
     scene.add(mesh);
+    gsapRotation(mesh , 1 , { z: mesh.rotation.z - Math.PI / 2 });
+    fixMatrix(1250);
 
-    gsap.to(mesh.rotation, 1, { z: mesh.rotation.z - Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
 }
 
 
 // B rotation
-
 let bRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -237,35 +199,13 @@ let bRotation= () => {
     });
 
     scene.add(mesh);
-
-    gsap.to(mesh.rotation, 1, { z: mesh.rotation.z + Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { z: mesh.rotation.z + Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
-// L rotation
 
+// L rotation
 let lRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -290,34 +230,13 @@ let lRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { x: mesh.rotation.x + Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { x: mesh.rotation.x + Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
-// R rotation
 
+// R rotation
 let rRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -342,29 +261,8 @@ let rRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { x: mesh.rotation.x - Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { x: mesh.rotation.x - Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
@@ -398,29 +296,8 @@ let urRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { y: mesh.rotation.y + Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { y: mesh.rotation.y + Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
@@ -430,7 +307,6 @@ let urRotation= () => {
 let drRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
-
 
     for (let i = 0; i < 27; i++) {
         scene.updateMatrixWorld(true);
@@ -450,33 +326,13 @@ let drRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { y: mesh.rotation.y - Math.PI / 2 })
+    gsapRotation(mesh , 1 , { y: mesh.rotation.y - Math.PI / 2 });
+    fixMatrix(1250);
 
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
 }
 
-//  F'  Rotation
 
+//  F'  Rotation
 let frRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -500,34 +356,13 @@ let frRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { z: mesh.rotation.z + Math.PI / 2 })
+    gsapRotation(mesh , 1 , { z: mesh.rotation.z + Math.PI / 2 });
+    fixMatrix(1250);
 
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
 }
 
 
 // B' rotation
-
 let brRotation=() => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -551,34 +386,13 @@ let brRotation=() => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { z: mesh.rotation.z - Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { z: mesh.rotation.z - Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
-// L' rotation
 
+// L' rotation
 let lrRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -603,35 +417,13 @@ let lrRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { x: mesh.rotation.x - Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { x: mesh.rotation.x - Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
+
 // R' rotation
-
-
 let rRRotation=() => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -654,29 +446,8 @@ let rRRotation=() => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1, { x: mesh.rotation.x + Math.PI / 2 })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1 , { x: mesh.rotation.x + Math.PI / 2 });
+    fixMatrix(1250);
 
 }
 
@@ -709,35 +480,13 @@ let uuRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1.2, { y: mesh.rotation.y - Math.PI })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1.2 , { y: mesh.rotation.y - Math.PI });
+    fixMatrix(1250);
 
 }
 
 
 //  D2  Rotation
-
 let ddRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -761,33 +510,12 @@ let ddRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1.2, { y: mesh.rotation.y + Math.PI })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1.2 , { y: mesh.rotation.y + Math.PI });
+    fixMatrix(1250);
 }
 
-//  F2  Rotation
 
+//  F2  Rotation
 let ffRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -811,34 +539,12 @@ let ffRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1.2, { z: mesh.rotation.z - Math.PI })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1.2 , { z: mesh.rotation.z - Math.PI });
+    fixMatrix(1250);
 }
 
 
 // B2 rotation
-
 let bbRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -862,34 +568,12 @@ let bbRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1.2, { z: mesh.rotation.z + Math.PI })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
-
+    gsapRotation(mesh , 1.2 , { z: mesh.rotation.z + Math.PI });
+    fixMatrix(1250);
 }
 
-// L2 rotation
 
+// L2 rotation
 let llRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -914,34 +598,13 @@ let llRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1.2, { x: mesh.rotation.x + Math.PI })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
+    gsapRotation(mesh , 1.2 , { x: mesh.rotation.x + Math.PI });
+    fixMatrix(1250);
 
 }
 
-// R2 rotation
 
+// R2 rotation
 let rrRotation= () => {
     const mesh = new THREE.Group();
     let uRot = []
@@ -966,30 +629,8 @@ let rrRotation= () => {
 
     scene.add(mesh);
 
-    gsap.to(mesh.rotation, 1.2, { x: mesh.rotation.x - Math.PI })
-
-    setTimeout(() => {
-
-        f.forEach((element, i) => {
-
-            let quaternion = new THREE.Quaternion();
-            scene.updateMatrixWorld(true);
-            quaternion.setFromRotationMatrix(element.matrixWorld);
-            element.quaternion.copy(quaternion);
-
-
-            let position1 = new THREE.Vector3();
-            scene.updateMatrixWorld(true);
-            position1.setFromMatrixPosition(element.matrixWorld)
-            element.position.copy(position1);
-
-            scene.add(element);
-
-        });
-        scene.updateMatrixWorld(true);
-
-    }, 1250)
-
+    gsapRotation(mesh , 1.2 , { x: mesh.rotation.x - Math.PI });
+    fixMatrix(1250);
 }
 
 
@@ -1007,7 +648,6 @@ let handleDisable = () => {
         document.querySelectorAll('.button')[i].disabled = false;
     }, 1250)
 }
-
 
 
 
@@ -1060,8 +700,6 @@ document.querySelectorAll('.button')[14].addEventListener('click', handleDisable
 document.querySelectorAll('.button')[15].addEventListener('click', handleDisable)
 document.querySelectorAll('.button')[16].addEventListener('click', handleDisable)
 document.querySelectorAll('.button')[17].addEventListener('click', handleDisable)
-
-
 
 
 /**
