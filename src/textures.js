@@ -19,9 +19,7 @@ const texture = textureLoader.load('/textures/pegatinaColor.png')
  let texture_dn = new THREE.TextureLoader().load( '/textures/exosystem_dn.jpg');
  let texture_rt = new THREE.TextureLoader().load( '/textures/exosystem_rt.jpg');
  let texture_lf = new THREE.TextureLoader().load( '/textures/exosystem_lf.jpg',()=>{
-   setTimeout(()=>{
     document.querySelector('.wrapper_loading').classList.add('load_none');
-   },4000)
  });
    
  materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft }));

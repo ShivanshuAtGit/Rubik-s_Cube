@@ -14,36 +14,124 @@ import material from './material'
  // faces
  
  let f = [], vector = [];
- let x = 0, y = 2, z = 1;
- 
- 
+
+ let x1 , y1, z1;
+ let sign = [-1,1]
+
  for (let i = 0; i < 9; i++) {
-     if (i % 3 === 0)
-         y--;
+    
+    x1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+    y1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+    z1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+
+    //  Front layer
+    f.push(new THREE.Mesh(geometry, material[3 * i]));
+    f[3 * i].position.set(x1,y1,z1);
+
+    x1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+    y1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+    z1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+
+    //  Mid layer
+    f.push(new THREE.Mesh(geometry, material[3 * i + 1]));
+    f[3 * i + 1].position.set(x1,y1,z1);
+
+    x1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+    y1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+    z1 = (Math.random() * 40 + 1) * sign[Math.round(Math.random()* 1)];
+
+    //  Last layer
+    f.push(new THREE.Mesh(geometry, material[3 * i + 2]));
+    f[3 * i + 2].position.set(x1,y1,z1);
+
+
+    scene.add(f[3 * i]);
+    scene.add(f[3 * i + 1]);
+    scene.add(f[3 * i + 2])
+
+}
+
+
+let x2 = 0, y2 = 2, z2 = 1;
+
+ for (let i = 0; i < 9; i++) {
+    if (i % 3 === 0)
+        y2--;
+
+    //  Front layer
+    gsap.to(f[3 * i].position, 1.3 ,{ x: x2 -1 })
+    gsap.to(f[3 * i].position, 1.3 ,{ y: y2 })
+    gsap.to(f[3 * i].position, 1.3 ,{ z: z2  })
+
+    //  Mid layer
+    gsap.to(f[3 * i + 1].position, 1.3 ,{ x: x2 -1 })
+    gsap.to(f[3 * i + 1].position, 1.3 ,{ y: y2 })
+    gsap.to(f[3 * i + 1].position, 1.3 ,{ z: z2 -1  })
+
+    //  Last layer
+    gsap.to(f[3 * i + 2].position, 1.3 ,{ x: x2 -1 })
+    gsap.to(f[3 * i + 2].position, 1.3 ,{ y: y2 })
+    gsap.to(f[3 * i + 2].position, 1.3 ,{ z: z2 -2  })
+
+    setTimeout(()=>{
+
+        let position1 = new THREE.Vector3();
+        scene.updateMatrixWorld(true);
+        position1.setFromMatrixPosition(f[3 * i].matrixWorld)
+        f[3 * i].position.copy(position1);
+
+        position1 = new THREE.Vector3();
+        scene.updateMatrixWorld(true);
+        position1.setFromMatrixPosition(f[3 * i + 1].matrixWorld)
+        f[3 * i + 1].position.copy(position1);
+
+        position1 = new THREE.Vector3();
+        scene.updateMatrixWorld(true);
+        position1.setFromMatrixPosition(f[3 * i + 2].matrixWorld)
+        f[3 * i + 2].position.copy(position1);
+
+    },1500)
+
+    vector.push(new THREE.Vector3(x2 - 1, y2, z2));
+    vector.push(new THREE.Vector3(x2 - 1, y2, z2 - 1));
+    vector.push(new THREE.Vector3(x2 - 1, y2, z2 - 2));
+
+    scene.add(f[3 * i]);
+    scene.add(f[3 * i + 1]);
+    scene.add(f[3 * i + 2]);
+
+    x2 = (x2 + 1) % 3;
+
+}
  
-     //  Front layer
-     f.push(new THREE.Mesh(geometry, material[3 * i]));
-     f[3 * i].position.set(x - 1, y, z);
  
-     //  Mid layer
-     f.push(new THREE.Mesh(geometry, material[3 * i + 1]));
-     f[3 * i + 1].position.set(x - 1, y, z - 1);
+//  for (let i = 0; i < 9; i++) {
+//      if (i % 3 === 0)
+//          y--;
  
-     //  Last layer
-     f.push(new THREE.Mesh(geometry, material[3 * i + 2]));
-     f[3 * i + 2].position.set(x - 1, y, z - 2);
+//      //  Front layer
+//      f.push(new THREE.Mesh(geometry, material[3 * i]));
+//      f[3 * i].position.set(x - 1, y, z);
  
-     vector.push(new THREE.Vector3(x - 1, y, z));
-     vector.push(new THREE.Vector3(x - 1, y, z - 1));
-     vector.push(new THREE.Vector3(x - 1, y, z - 2));
+//      //  Mid layer
+//      f.push(new THREE.Mesh(geometry, material[3 * i + 1]));
+//      f[3 * i + 1].position.set(x - 1, y, z - 1);
  
-     scene.add(f[3 * i]);
-     scene.add(f[3 * i + 1]);
-     scene.add(f[3 * i + 2])
+//      //  Last layer
+//      f.push(new THREE.Mesh(geometry, material[3 * i + 2]));
+//      f[3 * i + 2].position.set(x - 1, y, z - 2);
  
-     x = (x + 1) % 3;
+//      vector.push(new THREE.Vector3(x - 1, y, z));
+//      vector.push(new THREE.Vector3(x - 1, y, z - 1));
+//      vector.push(new THREE.Vector3(x - 1, y, z - 2));
  
- }
+//      scene.add(f[3 * i]);
+//      scene.add(f[3 * i + 1]);
+//      scene.add(f[3 * i + 2])
+ 
+//      x = (x + 1) % 3;
+ 
+//  }
 
 /**
  * Event Listener
