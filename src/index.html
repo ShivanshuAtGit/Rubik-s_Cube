@@ -11,13 +11,18 @@
 </head>
 
 <body>
+    <!-- Loading -->
     <div class="wrapper_loading">
         <div class="loading" style="background-image: url('/textures/Loader.gif')">
-            <!-- Loading -->
         </div>
     </div>
-    
 
+    <!-- Shuffle Modal -->
+    <div class="shuffle_modal none">
+        <div class="shuffle_loader" style="background-image: url('/textures/Shuffle.gif')">
+
+        </div>
+    </div>
 
     <div class="wrapper">
         <canvas class="webgl"></canvas>
@@ -26,33 +31,48 @@
             <h2> Welcome to our Universe</h2>
         </div>
         <div class="right_box">
-            <h1>Cube Moves</h1>
-            <div class="button_wrapper">
-                <button class="button" id='U'>U</button>
-                <button class="button" id='D'>D</button>
-                <button class="button" id='F'>F</button>
-                <button class="button" id='B'>B</button>
-                <button class="button" id='L'>L</button>
-                <button class="button" id='R'>R</button>
+
+            <div class="page1">
+                <h1>Click to Shuffle</h1>
+                <button class="btn play"> Play Game</button>
             </div>
 
-            <div class="button_wrapper">
-                <button class="button" id='Ur'>U'</button>
-                <button class="button" id='Dr'>D'</button>
-                <button class="button" id='Fr'>F'</button>
-                <button class="button" id='Br'>B'</button>
-                <button class="button" id='Lr'>L'</button>
-                <button class="button" id='Rr'>R'</button>
+            <div class="page2 none">
+                <h1>Get your Puzzle</h1>
+                <button class="btn shuffle"> Shuffle</button>
             </div>
 
-            <div class="button_wrapper">
-                <button class="button" id='U-2'>U2</button>
-                <button class="button" id='D-2'>D2</button>
-                <button class="button" id='F-2'>F2</button>
-                <button class="button" id='B-2'>B2</button>
-                <button class="button" id='L-2'>L2</button>
-                <button class="button" id='R-2'>R2</button>
+            <div class="page3 none">
+                <h1>Cube Moves</h1>
+                <button class="reshuffle"> Re-Shuffle</button>
+                <div class="button_wrapper">
+                    <button class="button" id='U'>U</button>
+                    <button class="button" id='D'>D</button>
+                    <button class="button" id='F'>F</button>
+                    <button class="button" id='B'>B</button>
+                    <button class="button" id='L'>L</button>
+                    <button class="button" id='R'>R</button>
+                </div>
+
+                <div class="button_wrapper">
+                    <button class="button" id='Ur'>U'</button>
+                    <button class="button" id='Dr'>D'</button>
+                    <button class="button" id='Fr'>F'</button>
+                    <button class="button" id='Br'>B'</button>
+                    <button class="button" id='Lr'>L'</button>
+                    <button class="button" id='Rr'>R'</button>
+                </div>
+
+                <div class="button_wrapper">
+                    <button class="button" id='U-2'>U2</button>
+                    <button class="button" id='D-2'>D2</button>
+                    <button class="button" id='F-2'>F2</button>
+                    <button class="button" id='B-2'>B2</button>
+                    <button class="button" id='L-2'>L2</button>
+                    <button class="button" id='R-2'>R2</button>
+                </div>
             </div>
+
 
         </div>
 

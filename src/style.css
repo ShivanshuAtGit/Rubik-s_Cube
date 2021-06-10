@@ -39,11 +39,26 @@ body
     animation-fill-mode: both;
 }
 
-@keyframes goIn{
-    to{
-        transform: scale(0);
-        display: none;
-    }
+.shuffle_modal{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.877);
+    height: 100vh;
+    width: 100vw;
+    z-index: 20;
+}
+
+.shuffle_loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: .5rem;
+    height: 70vh;
+    width: 60vw;
+    background-color: rgb(248, 238, 238);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 
@@ -64,10 +79,61 @@ body
     transform: translate(-50%,0);
     width: 70%;
     background-color: rgba(255, 255, 255, 0.068);
-    color: rgb(37, 37, 37);
+    color: rgb(17, 17, 17);
     padding: 1rem;
     border-radius: 5px;
     text-align: center;
+}
+
+/* .page1{
+    
+}
+
+.page2{
+
+}
+ */
+
+ .page3{
+     position: relative;
+ }
+
+.reshuffle{
+    position: absolute;
+    top: 1vh;
+    left: 5%;
+    padding: 4px 4px;
+    text-align: center;
+    font-family: 'Limelight', cursive;
+    border-radius: 1rem;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 
+        6px 6px 8px 0 rgba(255, 255, 255, 0.3) inset,
+        -6px -6px 8px 0 rgba(0, 0, 0, .25) inset;
+    color: white;
+    text-shadow: 0 0 1rem white;
+    transition: all 100ms ease-out;
+} 
+
+.reshuffle:focus{
+    outline: none;
+}
+
+.reshuffle:hover{
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
+
+}
+
+.reshuffle:active{
+    transform: translateY(1px) scale(.99);
+    box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.466);
+
+}
+
+.none{
+    display: none;
 }
 
 .right_box{
@@ -103,7 +169,7 @@ body
 
 .right_box h1{
     margin: .5rem 0 ;
-    color: rgb(37, 37, 37);
+    color: rgb(17, 17, 17);
     /* text-shadow: 0 0 1rem rgb(255, 255, 255); */
 }
 
@@ -149,8 +215,40 @@ body
 
 }
 
+.btn{
+    margin: 1rem;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    font-family: 'Limelight', cursive;
+    border-radius: 1rem;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 
+        6px 6px 8px 0 rgba(255, 255, 255, 0.3) inset,
+        -6px -6px 8px 0 rgba(0, 0, 0, .25) inset;
+    color: white;
+    text-shadow: 0 0 1rem white;
+    transition: all 100ms ease-out;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.btn:hover{
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
+
+}
+
+.btn:active{
+    transform: translateY(1px) scale(.99);
+    box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.466);
+
+}
+
 @media only screen and (max-width: 470px) {
-   
+    
 
     h1{
         font-size:1.5rem ;
@@ -167,3 +265,10 @@ body
         margin: .3rem;
     }
   }
+
+  @keyframes goIn{
+    to{
+        transform: scale(0);
+        display: none;
+    }
+}

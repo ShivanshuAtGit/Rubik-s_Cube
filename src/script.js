@@ -11,6 +11,39 @@ import {uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
+/**
+ *  Shuffle Function
+ */
+
+let allRotation = [uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
+    urRotation, drRotation, frRotation,brRotation, lrRotation, rRRotation,
+    uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation];
+
+let callShuffle =() =>{
+    let modal = document.querySelector('.shuffle_modal');
+    modal.classList.toggle('none')
+    
+    let min = 5;
+    let max = 13;
+
+    let val = Math.floor(Math.random() * (max-min) + min);
+
+    for(var i=0 ; i<val ;i++){
+        let index = Math.round(Math.random() * 6);
+        setTimeout(()=>{
+            allRotation[index](.1,110);
+        },200*i)
+    }
+
+    setTimeout(()=>{
+        modal.classList.toggle('load_none')
+
+        setTimeout(()=>{
+            modal.classList.toggle('load_none')
+            modal.classList.toggle('none')
+        },1000)
+    },200*i)
+}
 
 /** Button Disabled */
 
@@ -82,6 +115,37 @@ document.querySelectorAll('.button')[14].addEventListener('click', handleDisable
 document.querySelectorAll('.button')[15].addEventListener('click', handleDisable)
 document.querySelectorAll('.button')[16].addEventListener('click', handleDisable)
 document.querySelectorAll('.button')[17].addEventListener('click', handleDisable)
+
+
+
+/**
+ * Game Flow
+ */
+
+let page1 = document.querySelector('.page1');
+let page2 = document.querySelector('.page2');
+let page3 = document.querySelector('.page3');
+
+let play = document.querySelector('.play');
+let shuffle = document.querySelector('.shuffle');
+let reshuffle = document.querySelector('.reshuffle');
+
+play.addEventListener('click',()=>{
+    page1.classList.toggle('none')
+    page2.classList.toggle('none')
+})
+
+shuffle.addEventListener('click',()=>{
+    page2.classList.toggle('none')
+    page3.classList.toggle('none')
+
+    callShuffle();
+})
+
+reshuffle.addEventListener('click',()=>{
+
+    callShuffle();
+})
 
 
 /**

@@ -4,12 +4,11 @@ import gsap from 'gsap'
 import material from './material'
 
 
+
 /**
  * geometry
  */
  const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-
-
 
  // faces
  
@@ -43,7 +42,6 @@ import material from './material'
     //  Last layer
     f.push(new THREE.Mesh(geometry, material[3 * i + 2]));
     f[3 * i + 2].position.set(x1,y1,z1);
-
 
     scene.add(f[3 * i]);
     scene.add(f[3 * i + 1]);
@@ -103,7 +101,8 @@ let x2 = 0, y2 = 2, z2 = 1;
     x2 = (x2 + 1) % 3;
 
 }
- 
+
+
  
 //  for (let i = 0; i < 9; i++) {
 //      if (i % 3 === 0)
@@ -709,4 +708,4 @@ let rrRotation= (aDur,uDur) => {
 
 export {uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
                 urRotation, drRotation, frRotation,brRotation, lrRotation, rRRotation,
-                uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation};
+                uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation };
