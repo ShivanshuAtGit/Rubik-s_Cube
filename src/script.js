@@ -20,8 +20,6 @@ let allRotation = [uRotation , dRotation , fRotation ,bRotation, lRotation ,rRot
     uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation];
 
 let callShuffle =() =>{
-    
-    
     let min = 5;
     let max = 13;
 
@@ -121,14 +119,24 @@ document.querySelectorAll('.button')[17].addEventListener('click', handleDisable
  * Game Flow
  */
 
+ var video = document.getElementById('video');
+
+ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
+                            || navigator.webkitGetUserMedia || navigator.mozGetUserMedia||
+                            navigator.msGetUserMedia || navigator.oGetUserMedia;
+                          
+                            // console.log(navigator.mediaDevices)
+
 let page1 = document.querySelector('.page1');
 let page2 = document.querySelector('.page2');
 let page3 = document.querySelector('.page3');
 
 let play = document.querySelector('.play');
 let shuffle = document.querySelector('.shuffle');
+let guide = document.querySelector('.guidance');
 let reshuffle = document.querySelector('.reshuffle');
 let modal = document.querySelector('.shuffle_modal');
+let cam = document.querySelector('.Camera_Modal');
 
 play.addEventListener('click',()=>{
     page1.classList.toggle('none')
@@ -140,11 +148,26 @@ shuffle.addEventListener('click',()=>{
     page3.classList.toggle('none')
 
     modal.classList.toggle('none')
-
     setTimeout(()=>{
         callShuffle();
     },500)
     
+})
+
+guide.addEventListener('click',()=>{
+    cam.classList.toggle('none')
+    console.log('guide');
+      if(navigator.getUserMedia) {
+        navigator.getUserMedia({ video: true },handleVideo,videoError); 
+        }
+
+    function handleVideo(stream){
+        video.src = window.URL.createObjectURL(stream)
+    }
+    function videoError(e){
+        console.log(e.message)
+    }
+
 })
 
 reshuffle.addEventListener('click',()=>{
