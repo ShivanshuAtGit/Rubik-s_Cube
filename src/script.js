@@ -2,10 +2,12 @@ import './style.css'
 import * as THREE from 'three'
 import scene from './scene'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import {skybox} from './textures'
-import {uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
-    urRotation, drRotation, frRotation,brRotation, lrRotation, rRRotation,
-    uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation} from './rotation'
+import { skybox } from './textures'
+import {
+    uRotation, dRotation, fRotation, bRotation, lRotation, rRotation,
+    urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
+    uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
+} from './rotation'
 
 
 // Canvas
@@ -15,49 +17,49 @@ const canvas = document.querySelector('canvas.webgl')
  *  Shuffle Function
  */
 
-let allRotation = [uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
-    urRotation, drRotation, frRotation,brRotation, lrRotation, rRRotation,
-    uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation];
+let allRotation = [uRotation, dRotation, fRotation, bRotation, lRotation, rRotation,
+    urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
+    uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation];
 
-let callShuffle =() =>{
+let callShuffle = () => {
     let min = 5;
     let max = 13;
 
-    let val = Math.floor(Math.random() * (max-min) + min);
+    let val = Math.floor(Math.random() * (max - min) + min);
 
-    for(var i=0 ; i<val ;i++){
+    for (var i = 0; i < val; i++) {
         let index = Math.round(Math.random() * 6);
-        setTimeout(()=>{
-            allRotation[index](.1,200);
-        },400*i)
+        setTimeout(() => {
+            allRotation[index](.1, 200);
+        }, 400 * i)
     }
 
-    setTimeout(()=>{
+    setTimeout(() => {
         modal.classList.toggle('load_none')
 
-        setTimeout(()=>{
+        setTimeout(() => {
             modal.classList.toggle('load_none')
             modal.classList.toggle('none')
-        },1000)
-    },410*i+500)
+        }, 1000)
+    }, 410 * i + 500)
 }
 
 /** Button Disabled */
 
 let handleDisable = (e) => {
-    for(let i=0;i<18;i++)
+    for (let i = 0; i < 18; i++)
         document.querySelectorAll('.button')[i].disabled = true;
 
-    if(e.target.id.indexOf('-') === 1){
+    if (e.target.id.indexOf('-') === 1) {
         setTimeout(() => {
-            for(let i=0;i<18;i++)
-            document.querySelectorAll('.button')[i].disabled = false;
+            for (let i = 0; i < 18; i++)
+                document.querySelectorAll('.button')[i].disabled = false;
         }, 1100)
     }
-    else{
+    else {
         setTimeout(() => {
-            for(let i=0;i<18;i++)
-            document.querySelectorAll('.button')[i].disabled = false;
+            for (let i = 0; i < 18; i++)
+                document.querySelectorAll('.button')[i].disabled = false;
         }, 600)
     }
 }
@@ -67,26 +69,26 @@ let handleDisable = (e) => {
  *  Rotation Event Listener
  */
 
-document.getElementById('U').addEventListener('click',()=>{uRotation(.5,600)})
-document.getElementById('D').addEventListener('click',()=>{dRotation(.5,600)})
-document.getElementById('F').addEventListener('click',()=>{fRotation(.5,600)})
-document.getElementById('B').addEventListener('click',()=>{bRotation(.5,600)})
-document.getElementById('L').addEventListener('click',()=>{lRotation(.5,600)})
-document.getElementById('R').addEventListener('click',()=>{rRotation(.5,600)})
+document.getElementById('U').addEventListener('click', () => { uRotation(.5, 600) })
+document.getElementById('D').addEventListener('click', () => { dRotation(.5, 600) })
+document.getElementById('F').addEventListener('click', () => { fRotation(.5, 600) })
+document.getElementById('B').addEventListener('click', () => { bRotation(.5, 600) })
+document.getElementById('L').addEventListener('click', () => { lRotation(.5, 600) })
+document.getElementById('R').addEventListener('click', () => { rRotation(.5, 600) })
 
-document.getElementById('Ur').addEventListener('click',()=>{urRotation(.5,600)})
-document.getElementById('Dr').addEventListener('click',()=>{drRotation(.5,600)})
-document.getElementById('Fr').addEventListener('click',()=>{frRotation(.5,600)})
-document.getElementById('Br').addEventListener('click',()=>{brRotation(.5,600)})
-document.getElementById('Lr').addEventListener('click',()=>{lrRotation(.5,600)})
-document.getElementById('Rr').addEventListener('click',()=>{rRRotation(.5,600)})
+document.getElementById('Ur').addEventListener('click', () => { urRotation(.5, 600) })
+document.getElementById('Dr').addEventListener('click', () => { drRotation(.5, 600) })
+document.getElementById('Fr').addEventListener('click', () => { frRotation(.5, 600) })
+document.getElementById('Br').addEventListener('click', () => { brRotation(.5, 600) })
+document.getElementById('Lr').addEventListener('click', () => { lrRotation(.5, 600) })
+document.getElementById('Rr').addEventListener('click', () => { rRRotation(.5, 600) })
 
-document.getElementById('U-2').addEventListener('click',()=>{uuRotation(1,1100)})
-document.getElementById('D-2').addEventListener('click',()=>{ddRotation(1,1100)})
-document.getElementById('F-2').addEventListener('click',()=>{ffRotation(1,1100)})
-document.getElementById('B-2').addEventListener('click',()=>{bbRotation(1,1100)})
-document.getElementById('L-2').addEventListener('click',()=>{llRotation(1,1100)})
-document.getElementById('R-2').addEventListener('click',()=>{rrRotation(1,1100)})
+document.getElementById('U-2').addEventListener('click', () => { uuRotation(1, 1100) })
+document.getElementById('D-2').addEventListener('click', () => { ddRotation(1, 1100) })
+document.getElementById('F-2').addEventListener('click', () => { ffRotation(1, 1100) })
+document.getElementById('B-2').addEventListener('click', () => { bbRotation(1, 1100) })
+document.getElementById('L-2').addEventListener('click', () => { llRotation(1, 1100) })
+document.getElementById('R-2').addEventListener('click', () => { rrRotation(1, 1100) })
 
 
 /**
@@ -119,13 +121,8 @@ document.querySelectorAll('.button')[17].addEventListener('click', handleDisable
  * Game Flow
  */
 
- var video = document.getElementById('video');
+// camera
 
- navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
-                            || navigator.webkitGetUserMedia || navigator.mozGetUserMedia||
-                            navigator.msGetUserMedia || navigator.oGetUserMedia;
-                          
-                            // console.log(navigator.mediaDevices)
 
 let page1 = document.querySelector('.page1');
 let page2 = document.querySelector('.page2');
@@ -138,59 +135,77 @@ let reshuffle = document.querySelector('.reshuffle');
 let modal = document.querySelector('.shuffle_modal');
 let cam = document.querySelector('.Camera_Modal');
 
-play.addEventListener('click',()=>{
+play.addEventListener('click', () => {
     page1.classList.toggle('none')
     page2.classList.toggle('none')
 })
 
-shuffle.addEventListener('click',()=>{
+shuffle.addEventListener('click', () => {
     page2.classList.toggle('none')
     page3.classList.toggle('none')
 
     modal.classList.toggle('none')
-    setTimeout(()=>{
+    setTimeout(() => {
         callShuffle();
-    },500)
-    
-})
-
-guide.addEventListener('click',()=>{
-    cam.classList.toggle('none')
-    console.log('guide');
-      if(navigator.getUserMedia) {
-        navigator.getUserMedia({ video: true },handleVideo,videoError); 
-        }
-
-    function handleVideo(stream){
-        video.src = window.URL.createObjectURL(stream)
-    }
-    function videoError(e){
-        console.log(e.message)
-    }
+    }, 500)
 
 })
 
-reshuffle.addEventListener('click',()=>{
+reshuffle.addEventListener('click', () => {
 
     modal.classList.toggle('none')
-    
-    setTimeout(()=>{
+
+    setTimeout(() => {
         callShuffle();
-    },500)
+    }, 500)
 })
+
+
+// Camera Work
+
+var video = document.getElementById('video');
+var canvasPic = document.getElementById('canvasPic');
+var context = canvasPic.getContext('2d');
+var link = document.getElementById("snap");
+
+function convertCanvasToImage(canvasPic) {
+    var image = new Image();
+    image = canvasPic.toDataURL("image/png");
+    document.write('<img src="' + image + '"/>')
+}
+
+guide.addEventListener('click', () => {
+    cam.classList.toggle('none')
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
+        || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+        });
+    }
+})
+
+link.addEventListener("click", function () {
+    context.drawImage(video, 0, 0, 640, 480);
+    convertCanvasToImage(canvasPic);
+});
+
 
 
 /**
  * Sizes
  */
 const sizes = {
-    width: window.innerWidth ,
+    width: window.innerWidth,
     height: window.innerHeight
 }
 
 window.addEventListener('resize', () => {
     // Update sizes
-    sizes.width = window.innerWidth 
+    sizes.width = window.innerWidth
     sizes.height = window.innerHeight
 
     // Update camera
@@ -231,48 +246,48 @@ renderer.setClearColor(0x222222, 1);
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
- controls.minDistance = 3;
+controls.minDistance = 3;
 controls.maxDistance = 40;
 
- 
+
 /**
  * Lights
- */        
+ */
 
 const light = new THREE.AmbientLight(0xffffff, 1)
 scene.add(light)
 
-const directionalLight1 = new THREE.DirectionalLight( 0xffffff, 1 );
-directionalLight1.position.set(0,0,8)
-scene.add( directionalLight1 );
+const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight1.position.set(0, 0, 8)
+scene.add(directionalLight1);
 
-const light2 = new THREE.DirectionalLight( 0xffffff, 1);
-light2.position.set( -8,0,0 );
-scene.add( light2 );
+const light2 = new THREE.DirectionalLight(0xffffff, 1);
+light2.position.set(-8, 0, 0);
+scene.add(light2);
 
-const light3 = new THREE.DirectionalLight( 0xffffff, 1);
-light3.position.set( 8,0,0 );
-scene.add( light3 );
+const light3 = new THREE.DirectionalLight(0xffffff, 1);
+light3.position.set(8, 0, 0);
+scene.add(light3);
 
-const light4 = new THREE.DirectionalLight( 0xffffff, 1);
-light4.position.set( 0,0,-8 );
-scene.add( light4 );
+const light4 = new THREE.DirectionalLight(0xffffff, 1);
+light4.position.set(0, 0, -8);
+scene.add(light4);
 
-const light5 = new THREE.DirectionalLight( 0xffffff, 1);
-light5.position.set( 0,8,0 );
-scene.add( light5 );
+const light5 = new THREE.DirectionalLight(0xffffff, 1);
+light5.position.set(0, 8, 0);
+scene.add(light5);
 
-const light6 = new THREE.DirectionalLight( 0xffffff, 1);
-light6.position.set( 0,-8,0 );
-scene.add( light6 );
+const light6 = new THREE.DirectionalLight(0xffffff, 1);
+light6.position.set(0, -8, 0);
+scene.add(light6);
 
 
 /**
  * Skybox
  */
- scene.add( skybox );
+scene.add(skybox);
 
- 
+
 /**
  * Animate
  */
