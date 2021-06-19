@@ -8,7 +8,7 @@ import {
     urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
     uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
 } from './rotation'
-import { handleCamera, handleSnap } from './phaseImage'
+import { handleBackButton, handleCamera, handleRetry, handleSnap, resetImgArr } from './phaseImage'
 
 
 // Canvas
@@ -134,6 +134,9 @@ let shuffle = document.querySelector('.shuffle');
 let guide = document.querySelector('.guidance');
 let reshuffle = document.querySelector('.reshuffle');
 let modal = document.querySelector('.shuffle_modal');
+let back = document.querySelector('.modal_back');
+let retry = document.querySelector('.retry');
+
 
 play.addEventListener('click', () => {
     page1.classList.toggle('none')
@@ -152,7 +155,6 @@ shuffle.addEventListener('click', () => {
 })
 
 reshuffle.addEventListener('click', () => {
-
     modal.classList.toggle('none')
 
     setTimeout(() => {
@@ -164,7 +166,8 @@ reshuffle.addEventListener('click', () => {
 // Camera Work
 guide.addEventListener('click', handleCamera)
 link.addEventListener("click", handleSnap);
-
+back.addEventListener('click',handleBackButton)
+retry.addEventListener('click',handleRetry)
 
 /**
  * Sizes

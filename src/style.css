@@ -59,6 +59,19 @@ body
     margin: 5vh auto;
     border-radius: 1rem;
     text-align: center;
+    position: relative;
+}
+
+.modal_back{
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal_back:hover{
+    color: rgb(104, 104, 248);
 }
 
 #video{
@@ -88,8 +101,8 @@ body
     text-align: center;
 }
 
-#snap,
-#snap:link{
+a,
+a:link{
     display: inline-block;
     text-decoration: none;
     color: white;
@@ -104,26 +117,28 @@ body
     
 }
 
-#snap:hover{
+a:hover{
     transform: translateY(-3px) scale(1.02);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
 
 }
 
-#snap:active{
+a:active{
     transform: translateY(1px) scale(.99);
     box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.466);
 
 }
 
 .canvas_wrapper{
-    display: inline-block;
+    /* display: inline-block;
     width: 70vw;
-    height: 42vh;
+    height: 42vh; */
+    width: 100%;
     margin: 0 auto;
     border-radius: 2px;
     text-align: center;
 }
+
 
 #img{
     object-fit: contain;
