@@ -26,9 +26,22 @@
 
     <!-- capture cube -->
     <div class="Camera_Modal none">
-        <video id="video" width="640" height="480" autoplay></video>
-        <a href="#" id="snap">Snap Photo</a>
-        <canvas id="canvasPic" width="640" height="480"></canvas>
+        <div class="camera_wrapper">
+            <div class="video_wrapper">
+                <video id="video" autoplay></video>
+               <div class="border"></div>
+            </div>
+            
+
+            <div class="snap_wrapper">
+                <a href="#" id="snap">Snap Photo</a>
+            </div>
+
+            <div class="canvas_wrapper">
+                <canvas id="canvasPic" width="640" height="480"></canvas>
+                <img id="img" class="none" alt=""/>
+            </div>
+        </div>
     </div>
 
     <div class="wrapper">

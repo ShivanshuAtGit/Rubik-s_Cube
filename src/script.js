@@ -8,6 +8,7 @@ import {
     urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
     uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
 } from './rotation'
+import { handleCamera, handleSnap } from './phaseImage'
 
 
 // Canvas
@@ -127,13 +128,12 @@ document.querySelectorAll('.button')[17].addEventListener('click', handleDisable
 let page1 = document.querySelector('.page1');
 let page2 = document.querySelector('.page2');
 let page3 = document.querySelector('.page3');
-
+var link = document.getElementById("snap");
 let play = document.querySelector('.play');
 let shuffle = document.querySelector('.shuffle');
 let guide = document.querySelector('.guidance');
 let reshuffle = document.querySelector('.reshuffle');
 let modal = document.querySelector('.shuffle_modal');
-let cam = document.querySelector('.Camera_Modal');
 
 play.addEventListener('click', () => {
     page1.classList.toggle('none')
@@ -162,37 +162,8 @@ reshuffle.addEventListener('click', () => {
 
 
 // Camera Work
-
-var video = document.getElementById('video');
-var canvasPic = document.getElementById('canvasPic');
-var context = canvasPic.getContext('2d');
-var link = document.getElementById("snap");
-
-function convertCanvasToImage(canvasPic) {
-    var image = new Image();
-    image = canvasPic.toDataURL("image/png");
-    document.write('<img src="' + image + '"/>')
-}
-
-guide.addEventListener('click', () => {
-    cam.classList.toggle('none')
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
-        || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
-        navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-            video.srcObject = stream;
-            video.play();
-        });
-    }
-})
-
-link.addEventListener("click", function () {
-    context.drawImage(video, 0, 0, 640, 480);
-    convertCanvasToImage(canvasPic);
-});
-
+guide.addEventListener('click', handleCamera)
+link.addEventListener("click", handleSnap);
 
 
 /**
