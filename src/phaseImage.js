@@ -8,19 +8,25 @@ let phaseImg = document.getElementById('img');
 let re = document.querySelector('.re');
 let sn = document.querySelector('.sn');
 let sub= document.querySelector('.sub');
-let btnsWrapper = document.querySelector(".snap_wrapper")
+let index = document.querySelector('.img_index')
 var imgArr = [];
+let phase = ['upper', 'right', 'front' ,'down' , 'left', 'back'];
 
 let resetImgArr = ()=>{
     phaseImg.classList.add('none')
     re.classList.add('none')
     imgArr = [];
+    index.innerHTML =`snap ${phase[0]} phase`;
 }
 
 let handleRetry = ()=>{
-    const val =imgArr.length
-    imgArr.length =val -1;
+    imgArr.pop()
     re.classList.add('none')
+    index.innerHTML =`snap ${phase[imgArr.length]} phase`
+    if(imgArr.length < 6){
+        sn.classList.remove('none');
+        sub.classList.add('none')
+    } 
     phaseImg.classList.add('none');
 }
 
@@ -51,13 +57,19 @@ function convertCanvasToImage(canvasPic) {
     phaseImg.classList.remove('none');
     phaseImg.setAttribute('src',image)
     canvasPic.classList.add('none');
-    imgArr.push(image);
-    console.log(imgArr.length)
 
-    if(imgArr.length === 6){
+    imgArr.push(image);
+    index.innerHTML =`snap ${phase[imgArr.length]} phase`
+
+    console.log(imgArr.length)
+    if(imgArr.length >= 5){
         sn.classList.add('none');
         sub.classList.remove('none')
-    }  
+    } 
+    else if(imgArr.length < 5){
+        sn.classList.remove('none');
+        sub.classList.add('none')
+    } 
 }
 
 let handleSnap = () => {

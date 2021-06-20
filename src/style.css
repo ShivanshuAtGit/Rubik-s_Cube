@@ -52,7 +52,7 @@ body
 
 .camera_wrapper{
     background-color: white;
-    height: 85vh;
+    height: 90vh;
     width: 90vw;
     /* padding: 2vh; */
     color: black;
@@ -137,6 +137,12 @@ a:active{
     margin: 0 auto;
     border-radius: 2px;
     text-align: center;
+}
+
+.img_index{
+    font-size: 13px;
+    transform: translateY(14px);
+    text-transform: uppercase;
 }
 
 
