@@ -8,10 +8,24 @@ let saveWrapper = document.querySelector(".save_wrapper");
 let retryWrapper = document.querySelector('.retry_wrapper');
 let cam = document.querySelector('.Camera_Modal');
 let phaseImg = document.getElementById('img');
+let acknowledgeWrapper = document.querySelector('.acknowledge_wrapper');
+let camerWrapper = document.querySelector('.camera_wrapper');
 let index = document.querySelector('.img_index')
 var imgArr = [];
 var recentImage;
 let phase = ['upper', 'right', 'front', 'down', 'left', 'back'];
+
+// aknowledge api function
+let apiFetchResult = (img) =>{
+    let strColor ;
+    // strColor = callApi(img)
+
+    // for testing purpose
+    strColor = 'rbgowwyob';
+    camerWrapper.classList.add('none')
+    acknowledgeWrapper.classList.remove('none')
+
+}
 
 // Image Data Structure Updation
 let storeImage = (image) => {
@@ -43,9 +57,10 @@ let resetImgArr = () => {
 // Save
 let handleSave = () =>{
     imgArr.push(recentImage); 
+    apiFetchResult(recentImage)
     phaseImg.classList.add('none');
     videoWrapper.classList.remove('none')
-    buttonRowUpdation('save')   
+    buttonRowUpdation('save') 
 }
 
 // Retry

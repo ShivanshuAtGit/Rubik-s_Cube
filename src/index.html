@@ -24,8 +24,42 @@
         </div>
     </div>
 
+
     <!-- capture cube -->
     <div class="Camera_Modal none">
+        <!-- Color Acknowledge Modal -->
+
+        <div class="acknowledge_wrapper none">
+            <div class="cube_grid-background">
+                <h1>Acknowledge the Result</h1>
+                <div class="cube_wrapper">
+                    <div class="grid-container">
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                    </div>
+                </div>
+                <h2> Drag and Drop the Colors</h2>
+                <div class="color_options">
+                    <div id='red' class="color" draggable="true"></div>
+                    <div id='white' class="color" draggable="true"></div>
+                    <div id='yellow' class="color" draggable="true"></div>
+                    <div id="blue" class="color" draggable="true"></div>
+                    <div id="green" class="color" draggable="true"></div>
+                    <div id="orange" class="color" draggable="true"></div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <!-- camera images -->
         <div class="camera_wrapper">
             <span class="modal_back">&#8592; back</span>
 
@@ -39,7 +73,7 @@
                 <div class="img_wrapper">
                     <img id="img" class="none" alt="" />
                 </div>
-                
+
 
                 <div class="button_covers">
                     <span class="snap_wrapper"><button id="snap">Snap Photo</button></span>
@@ -48,25 +82,6 @@
                 </div>
 
             </div>
-
-            <!-- <div class="video_wrapper">
-                <video id="video" autoplay></video>
-               <div class="border"></div>
-            </div>
-            
-
-            <div class="snap_wrapper">
-                <span class="sn" ><a href="#" id="snap">Snap Photo</a></span>
-                <span class="re none"><a href="#" class="retry">&#11119; Retry</a></span>
-                <span class="sub none"><a href="#" class="retry">Snap & Submit</a></span>
-            </div>
-
-            <div class="canvas_wrapper">
-                <p class="img_index">snap upper phase</p>
-                <canvas id="canvasPic" width="640" height="480"></canvas>
-                <img id="img" class="none" alt=""/>
-            </div> -->
-
         </div>
     </div>
 

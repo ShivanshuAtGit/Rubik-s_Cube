@@ -170,6 +170,28 @@ save.addEventListener("click", handleSave);
 back.addEventListener('click',handleBackButton)
 retry.addEventListener('click',handleRetry)
 
+// draggable color boxes
+let colorBoxes = document.getElementsByClassName('grid-item')
+let colorOption = document.getElementsByClassName('color')
+let dragColor;
+for(let colors of colorOption){
+    colors.addEventListener('dragstart',(e)=>{
+        let Id = e.target.id;
+        let elem= document.getElementById(Id)
+        dragColor = window.getComputedStyle(elem, null).getPropertyValue("background-color");
+    })
+}
+
+for(let box of colorBoxes){
+    box.addEventListener('dragover',(e)=>{
+        e.preventDefault()
+    })
+
+    box.addEventListener('drop',(e)=>{
+        e.target.style.backgroundColor = dragColor;
+    })
+}
+
 /**
  * Sizes
  */

@@ -50,6 +50,79 @@ body
     z-index: 20;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: white;
+    padding: 10px;
+  }
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    min-height: 80px;
+    min-width: 80px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+.cube_grid-background{
+    background-color: rgba(255, 255, 255, 0.925);
+    height: 80vh;
+    width: 80vw;
+    padding: 20px;
+    color: black;
+    margin: 5vh auto;
+    border-radius: 1rem;
+    text-align: center;
+}  
+
+.cube_wrapper{
+    height: 300px;
+    width: 300px;
+    margin: 0 auto
+}
+
+.color_options{
+    display: flex;
+    height: 80px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.color{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+/* All color */
+
+#red{
+    background-color: #c01629;
+}
+
+#white{
+    background-color: #dae8e8;
+}
+
+#yellow{
+    background-color: #dbb60d;
+}
+
+#orange{
+    background-color: #e95608;
+}
+
+#green{
+    background-color: #027414;
+}
+
+#blue{
+    background-color: #053c99;
+}
+
 .camera_wrapper{
     background-color: rgba(255, 255, 255, 0.925);
     height: 90vh;
