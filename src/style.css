@@ -51,7 +51,7 @@ body
 }
 
 .camera_wrapper{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.925);
     height: 90vh;
     width: 90vw;
     /* padding: 2vh; */
@@ -97,14 +97,16 @@ body
     z-index: 100;
 }
 
-.snap_wrapper{
+.button_covers{
     text-align: center;
+    transform: translateY(40px);
 }
 
-a,
-a:link{
+#snap,
+#save,
+.retry{
     display: inline-block;
-    text-decoration: none;
+    border: none;
     color: white;
     padding: 10px 15px;
     border-radius: 1rem;
@@ -117,22 +119,27 @@ a:link{
     
 }
 
-a:hover{
+#snap:focus,
+#save:focus,
+.retry:focus{
+    outline: none;
+}
+
+#snap:hover,
+#save:hover,
+.retry:hover{
     transform: translateY(-3px) scale(1.02);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
-
 }
 
-a:active{
+#snap:active,
+#save:active,
+.retry:active{
     transform: translateY(1px) scale(.99);
     box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.466);
-
 }
 
-.canvas_wrapper{
-    /* display: inline-block;
-    width: 70vw;
-    height: 42vh; */
+.snapwork{
     width: 100%;
     margin: 0 auto;
     border-radius: 2px;
@@ -145,14 +152,15 @@ a:active{
     text-transform: uppercase;
 }
 
+.img_wrapper{
+    transform: translateY(15px);
+}
 
 #img{
     object-fit: contain;
     height: 280px;
     width: 280px;
 }
-
-
 
 
 .shuffle_modal{

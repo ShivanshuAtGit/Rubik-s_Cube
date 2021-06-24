@@ -1,42 +1,67 @@
 
-var link = document.getElementById("snap");
 var video = document.getElementById('video');
+let videoWrapper = document.querySelector('.video_wrapper')
 var canvasPic = document.getElementById('canvasPic');
 var context = canvasPic.getContext('2d');
+var snapWrapper = document.querySelector(".snap_wrapper");
+let saveWrapper = document.querySelector(".save_wrapper");
+let retryWrapper = document.querySelector('.retry_wrapper');
 let cam = document.querySelector('.Camera_Modal');
 let phaseImg = document.getElementById('img');
-let re = document.querySelector('.re');
-let sn = document.querySelector('.sn');
-let sub= document.querySelector('.sub');
 let index = document.querySelector('.img_index')
 var imgArr = [];
-let phase = ['upper', 'right', 'front' ,'down' , 'left', 'back'];
+var recentImage;
+let phase = ['upper', 'right', 'front', 'down', 'left', 'back'];
 
-let resetImgArr = ()=>{
+// Image Data Structure Updation
+let storeImage = (image) => {
+    recentImage = image;
+    index.innerHTML = `snap ${phase[imgArr.length]} phase`
+    console.log(imgArr.length)
+}
+
+// Button row Update
+let buttonRowUpdation = (args) => {
+    if (args === 'retry' || args === 'save') {
+        snapWrapper.classList.remove('none')
+        saveWrapper.classList.add('none')
+        retryWrapper.classList.add('none')
+    }
+    else {
+        snapWrapper.classList.add('none')
+        saveWrapper.classList.remove('none')
+        retryWrapper.classList.remove('none')
+    }
+}
+
+let resetImgArr = () => {
     phaseImg.classList.add('none')
-    re.classList.add('none')
     imgArr = [];
-    index.innerHTML =`snap ${phase[0]} phase`;
+    index.innerHTML = `snap ${phase[0]} phase`;
 }
 
-let handleRetry = ()=>{
-    imgArr.pop()
-    re.classList.add('none')
-    index.innerHTML =`snap ${phase[imgArr.length]} phase`
-    if(imgArr.length < 6){
-        sn.classList.remove('none');
-        sub.classList.add('none')
-    } 
+// Save
+let handleSave = () =>{
+    imgArr.push(recentImage); 
     phaseImg.classList.add('none');
+    videoWrapper.classList.remove('none')
+    buttonRowUpdation('save')   
 }
 
-let handleBackButton = ()=>{
+// Retry
+let handleRetry = () => {
+    phaseImg.classList.add('none');
+    videoWrapper.classList.remove('none')
+    buttonRowUpdation('retry')
+}
+
+// Back Button handler
+let handleBackButton = () => {
     resetImgArr();
-    sn.classList.remove('none')
-    sub.classList.add('none');
-    cam.classList.add('none')
 }
 
+
+//  Camera Initiation
 let handleCamera = () => {
     cam.classList.toggle('none')
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
@@ -51,33 +76,22 @@ let handleCamera = () => {
     }
 }
 
+// Canvas to image converter
 function convertCanvasToImage(canvasPic) {
     var image = new Image();
     image = canvasPic.toDataURL("image/png");
+    videoWrapper.classList.add('none')
     phaseImg.classList.remove('none');
-    phaseImg.setAttribute('src',image)
-    canvasPic.classList.add('none');
-
-    imgArr.push(image);
-    index.innerHTML =`snap ${phase[imgArr.length]} phase`
-
-    console.log(imgArr.length)
-    if(imgArr.length >= 5){
-        sn.classList.add('none');
-        sub.classList.remove('none')
-    } 
-    else if(imgArr.length < 5){
-        sn.classList.remove('none');
-        sub.classList.add('none')
-    } 
+    phaseImg.setAttribute('src', image)
+    buttonRowUpdation('snap');
+    storeImage(image);
 }
 
+// Snap click function
 let handleSnap = () => {
-    re.classList.remove('none')
-    context.drawImage(video, 104, 24, 432, 432,0,0,432,432);
+    context.drawImage(video, 104, 24, 432, 432, 0, 0, 432, 432);
     convertCanvasToImage(canvasPic);
-    
 }
 
 
-export {handleCamera , handleSnap, handleBackButton , resetImgArr, handleRetry};
+export { handleCamera, handleSnap, handleBackButton, handleSave, handleRetry };

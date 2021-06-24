@@ -29,7 +29,27 @@
         <div class="camera_wrapper">
             <span class="modal_back">&#8592; back</span>
 
-            <div class="video_wrapper">
+            <div class="snapwork">
+                <div class="video_wrapper">
+                    <video id="video" autoplay></video>
+                    <div class="border"></div>
+                </div>
+
+                <canvas id="canvasPic" class="none" width="432" height="432"></canvas>
+                <div class="img_wrapper">
+                    <img id="img" class="none" alt="" />
+                </div>
+                
+
+                <div class="button_covers">
+                    <span class="snap_wrapper"><button id="snap">Snap Photo</button></span>
+                    <span class="save_wrapper none"><button id="save">Save</button></span>
+                    <span class="retry_wrapper none"><button class="retry">&#11119; Retry</button></span>
+                </div>
+
+            </div>
+
+            <!-- <div class="video_wrapper">
                 <video id="video" autoplay></video>
                <div class="border"></div>
             </div>
@@ -45,7 +65,7 @@
                 <p class="img_index">snap upper phase</p>
                 <canvas id="canvasPic" width="640" height="480"></canvas>
                 <img id="img" class="none" alt=""/>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -104,7 +124,7 @@
         </div>
 
     </div>
-    
+
 
 </body>
 

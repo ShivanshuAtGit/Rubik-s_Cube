@@ -8,7 +8,7 @@ import {
     urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
     uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
 } from './rotation'
-import { handleBackButton, handleCamera, handleRetry, handleSnap, resetImgArr } from './phaseImage'
+import { handleBackButton, handleCamera, handleRetry, handleSnap, handleSave } from './phaseImage'
 
 
 // Canvas
@@ -122,13 +122,13 @@ document.querySelectorAll('.button')[17].addEventListener('click', handleDisable
  * Game Flow
  */
 
-// camera
-
+// Routes
 
 let page1 = document.querySelector('.page1');
 let page2 = document.querySelector('.page2');
 let page3 = document.querySelector('.page3');
-var link = document.getElementById("snap");
+var snap = document.getElementById("snap");
+var save = document.getElementById("save");
 let play = document.querySelector('.play');
 let shuffle = document.querySelector('.shuffle');
 let guide = document.querySelector('.guidance');
@@ -165,7 +165,8 @@ reshuffle.addEventListener('click', () => {
 
 // Camera Work
 guide.addEventListener('click', handleCamera)
-link.addEventListener("click", handleSnap);
+snap.addEventListener("click", handleSnap);
+save.addEventListener("click", handleSave);
 back.addEventListener('click',handleBackButton)
 retry.addEventListener('click',handleRetry)
 
