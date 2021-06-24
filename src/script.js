@@ -8,7 +8,7 @@ import {
     urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
     uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
 } from './rotation'
-import { handleBackButton, handleCamera, handleRetry, handleSnap, handleSave } from './phaseImage'
+import { handleBackButton, handleCamera, handleRetry, handleSnap, handleSave,handleConfirm,handleSubmit } from './phaseImage'
 
 
 // Canvas
@@ -129,6 +129,8 @@ let page2 = document.querySelector('.page2');
 let page3 = document.querySelector('.page3');
 var snap = document.getElementById("snap");
 var save = document.getElementById("save");
+var confirm = document.getElementById("confirm");
+var submit = document.getElementById("submit");
 let play = document.querySelector('.play');
 let shuffle = document.querySelector('.shuffle');
 let guide = document.querySelector('.guidance');
@@ -165,15 +167,18 @@ reshuffle.addEventListener('click', () => {
 
 // Camera Work
 guide.addEventListener('click', handleCamera)
-snap.addEventListener("click", handleSnap);
-save.addEventListener("click", handleSave);
+snap.addEventListener("click", handleSnap)
+save.addEventListener("click", handleSave)
+confirm.addEventListener("click", handleConfirm)
 back.addEventListener('click',handleBackButton)
 retry.addEventListener('click',handleRetry)
+submit.addEventListener('click',handleSubmit)
 
 // draggable color boxes
 let colorBoxes = document.getElementsByClassName('grid-item')
 let colorOption = document.getElementsByClassName('color')
 let dragColor;
+
 for(let colors of colorOption){
     colors.addEventListener('dragstart',(e)=>{
         let Id = e.target.id;

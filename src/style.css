@@ -175,6 +175,7 @@ body
     transform: translateY(40px);
 }
 
+#submit,
 #confirm,
 #snap,
 #save,
@@ -193,6 +194,7 @@ body
     
 }
 
+#submit:focus,
 #confirm:focus,
 #snap:focus,
 #save:focus,
@@ -200,6 +202,7 @@ body
     outline: none;
 }
 
+#submit:hover,
 #confirm:hover,
 #snap:hover,
 #save:hover,
@@ -208,6 +211,7 @@ body
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
 }
 
+#submit:active,
 #confirm:active,
 #snap:active,
 #save:active,
