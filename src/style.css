@@ -175,6 +175,7 @@ body
     transform: translateY(40px);
 }
 
+#confirm,
 #snap,
 #save,
 .retry{
@@ -192,12 +193,14 @@ body
     
 }
 
+#confirm:focus,
 #snap:focus,
 #save:focus,
 .retry:focus{
     outline: none;
 }
 
+#confirm:hover,
 #snap:hover,
 #save:hover,
 .retry:hover{
@@ -205,6 +208,7 @@ body
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
 }
 
+#confirm:active,
 #snap:active,
 #save:active,
 .retry:active{

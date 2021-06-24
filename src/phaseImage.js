@@ -10,7 +10,6 @@ let cam = document.querySelector('.Camera_Modal');
 let phaseImg = document.getElementById('img');
 let acknowledgeWrapper = document.querySelector('.acknowledge_wrapper');
 let camerWrapper = document.querySelector('.camera_wrapper');
-let index = document.querySelector('.img_index')
 var imgArr = [];
 var recentImage;
 let phase = ['upper', 'right', 'front', 'down', 'left', 'back'];
@@ -30,7 +29,7 @@ let apiFetchResult = (img) =>{
 // Image Data Structure Updation
 let storeImage = (image) => {
     recentImage = image;
-    index.innerHTML = `snap ${phase[imgArr.length]} phase`
+    // index.innerHTML = `snap ${phase[imgArr.length]} phase`
     console.log(imgArr.length)
 }
 
@@ -51,7 +50,7 @@ let buttonRowUpdation = (args) => {
 let resetImgArr = () => {
     phaseImg.classList.add('none')
     imgArr = [];
-    index.innerHTML = `snap ${phase[0]} phase`;
+    // index.innerHTML = `snap ${phase[0]} phase`;
 }
 
 // Save
