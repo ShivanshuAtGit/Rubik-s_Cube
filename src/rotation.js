@@ -103,34 +103,7 @@ let x2 = 0, y2 = 2, z2 = 1;
 }
 
 
- 
-//  for (let i = 0; i < 9; i++) {
-//      if (i % 3 === 0)
-//          y--;
- 
-//      //  Front layer
-//      f.push(new THREE.Mesh(geometry, material[3 * i]));
-//      f[3 * i].position.set(x - 1, y, z);
- 
-//      //  Mid layer
-//      f.push(new THREE.Mesh(geometry, material[3 * i + 1]));
-//      f[3 * i + 1].position.set(x - 1, y, z - 1);
- 
-//      //  Last layer
-//      f.push(new THREE.Mesh(geometry, material[3 * i + 2]));
-//      f[3 * i + 2].position.set(x - 1, y, z - 2);
- 
-//      vector.push(new THREE.Vector3(x - 1, y, z));
-//      vector.push(new THREE.Vector3(x - 1, y, z - 1));
-//      vector.push(new THREE.Vector3(x - 1, y, z - 2));
- 
-//      scene.add(f[3 * i]);
-//      scene.add(f[3 * i + 1]);
-//      scene.add(f[3 * i + 2])
- 
-//      x = (x + 1) % 3;
- 
-//  }
+
 
 /**
  * Event Listener
@@ -706,6 +679,6 @@ let rrRotation= (aDur,uDur) => {
     fixMatrix(uDur);
 }
 
-export {uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
+export {f,uRotation , dRotation , fRotation ,bRotation, lRotation ,rRotation,
                 urRotation, drRotation, frRotation,brRotation, lrRotation, rRRotation,
                 uuRotation, ddRotation , ffRotation , bbRotation , llRotation , rrRotation };

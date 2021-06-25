@@ -9,7 +9,9 @@ import {texture} from './textures'
 
  let matList = [];
  const material = [];
+
  
+
  /** First Layer */
  // 1st Dice 
  matList.push(new THREE.MeshStandardMaterial({metalness: 1, roughness:.6, map: texture, color: 0x000000 }))
@@ -287,5 +289,6 @@ import {texture} from './textures'
  matList.push(new THREE.MeshStandardMaterial({metalness: 1, roughness:.6, map: texture, color: backColor[6] }))
  material.push(matList);
  matList = [];
+ 
  
  export default material;
