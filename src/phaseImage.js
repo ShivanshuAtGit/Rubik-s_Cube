@@ -126,7 +126,7 @@ let apiFetchResult = (img) => {
             redirect: 'follow'
         };
 
-        fetch("http://18.117.76.134:8001/solver/InputStream/", requestOptions)
+        fetch("https://therubiksolver.herokuapp.com/solver/InputStream/", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -219,6 +219,7 @@ function convertCanvasToImage(canvasPic) {
 // uplOad Image
 let uploadImage = () => {
     var image = URL.createObjectURL(fileImage.files[0]);
+    // var img = fileImage.files[0];
     videoWrapper.classList.add('none')
     phaseImg.classList.remove('none');
     phaseImg.setAttribute('src', image)
@@ -226,7 +227,7 @@ let uploadImage = () => {
     storeImage(image);
     fileImage.value = null;
     document.getElementById('upload_submit').disabled = true;
-    // console.log(image)
+    // console.log(image,img)
 }
 
 // Snap click function
