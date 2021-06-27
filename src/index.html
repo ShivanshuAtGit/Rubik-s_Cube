@@ -7,6 +7,7 @@
     <link rel="icon" href="/textures/favicon.svg" sizes="any" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <title>Rubik's Cube</title>
 </head>
 
@@ -54,10 +55,10 @@
                     <div id="green" class="color" draggable="true"></div>
                     <div id="orange" class="color" draggable="true"></div>
                 </div>
-                
+
                 <button id="confirm">Confirm</button>
             </div>
-            
+
         </div>
 
         <!-- camera images -->
@@ -78,7 +79,19 @@
 
 
                 <div class="button_covers">
-                    <span class="snap_wrapper"><button id="snap">Snap Photo</button></span>
+
+
+                    <span class="snap_wrapper">
+                        <button id="snap">Snap Photo</button>
+                        <p>Or</p>
+                        <div>
+                            <input type="file" id="myFile" name="filename" onchange="handleDisabled();" accept=".jpg,.jpeg,.png">
+                            <input type="submit" id="upload_submit" disabled>
+                        </div> 
+                        <p>Or</p>
+                        <button id="manual">Select Colors Manually</button> 
+                    </span>
+
                     <span class="save_wrapper none"><button id="save">Save</button></span>
                     <span class="retry_wrapper none"><button class="retry">&#11119; Retry</button></span>
                     <span class="submit_wrapper none"><button id="submit">Submit</button></span>
@@ -142,6 +155,12 @@
         </div>
 
     </div>
+    <script>
+        function handleDisabled(){
+            document.getElementById('upload_submit').disabled= false;
+        }
+
+    </script>
 
 
 </body>

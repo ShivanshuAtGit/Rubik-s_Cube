@@ -1,5 +1,8 @@
 import { imposeColor } from "./phaseColors";
 
+let page1 = document.querySelector('.page1');
+let page2 = document.querySelector('.page2');
+let page3 = document.querySelector('.page3');
 var video = document.getElementById('video');
 let videoWrapper = document.querySelector('.video_wrapper')
 var canvasPic = document.getElementById('canvasPic');
@@ -14,12 +17,20 @@ let ackHead = document.querySelector('.aklg_heading');
 let acknowledgeWrapper = document.querySelector('.acknowledge_wrapper');
 let camerWrapper = document.querySelector('.camera_wrapper');
 let colorBoxes = document.getElementsByClassName('grid-item')
+let fileImage = document.getElementById('myFile');
 let imgName = document.querySelector('.imgName');
 var imgArr = [];
 var recentImage;
-let phaseColorsArray =[]
-
+let phaseColorsArray = []
 let phase = ['Upper', 'Right', 'Front', 'Down', 'Left', 'Back'];
+
+// Move Page to Solve
+let renderMovePage = () => {
+    page1.classList.add('none');
+    page2.classList.add('none');
+    page3.classList.remove('none');
+}
+
 
 // Button row Update
 let buttonRowUpdation = (args) => {
@@ -34,17 +45,17 @@ let buttonRowUpdation = (args) => {
         saveWrapper.classList.remove('none')
         retryWrapper.classList.remove('none')
         submitWrapper.classList.add('none')
-        imgName.innerHTML=`Submit your Collection`
-        
+        imgName.innerHTML = `Submit your Collection`
+
     }
 
-    if(imgArr.length >= 6){
+    if (imgArr.length >= 6) {
         snapWrapper.classList.add('none')
         saveWrapper.classList.add('none')
         retryWrapper.classList.add('none')
         submitWrapper.classList.remove('none')
     }
-    
+
 }
 
 // Reset Capture block
@@ -52,65 +63,82 @@ let resetImgArr = () => {
     videoWrapper.classList.remove('none')
     phaseImg.classList.add('none')
     imgArr = [];
-    imgName.innerHTML=`Take Snap of ${phase[imgArr.length]} Phase`
+    imgName.innerHTML = `Take Snap of ${phase[imgArr.length]} Phase`
     buttonRowUpdation('retry')
     cam.classList.toggle('none')
 }
 
 // Submit Click
-let handleSubmit = () =>{
-   //  call function to impose color on 3D Cube 
-   imposeColor(phaseColorsArray)
-    resetImgArr();
+let handleSubmit = () => {
+    imposeColor(phaseColorsArray)     // 1. Impose Color on 3D cube
+    resetImgArr();                     // 2. Reset Datastructure and UI
+    renderMovePage();                   // 3. Move page to solve cube
 }
 
 //  String to Color
-let converStringToColor = (str) =>{
-    var colorPallet =[]
-    for(let i=0;i<str.length;i++){
-        if(str[i]=== 'r')
-        colorPallet.push('#c01629');
-        else if(str[i]=== 'b')
-        colorPallet.push('#053c99');
-        else if(str[i]=== 'g')
-        colorPallet.push('#027414');
-        else if(str[i]=== 'o')
-        colorPallet.push('#e95608');
-        else if(str[i]=== 'w')
-        colorPallet.push('#dae8e8');
-        else if(str[i]=== 'y')
-        colorPallet.push('#dbb60d');  
+let converStringToColor = (str) => {
+    var colorPallet = []
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === 'r')
+            colorPallet.push('#c01629');
+        else if (str[i] === 'b')
+            colorPallet.push('#053c99');
+        else if (str[i] === 'g')
+            colorPallet.push('#027414');
+        else if (str[i] === 'o')
+            colorPallet.push('#e95608');
+        else if (str[i] === 'w')
+            colorPallet.push('#dae8e8');
+        else if (str[i] === 'y')
+            colorPallet.push('#dbb60d');
     }
     return colorPallet;
 }
 
 
 // confirm button
-let handleConfirm = () =>{
-    let arr =[]
-    for(let box of colorBoxes){
-        arr.push(box.style.backgroundColor)  
+let handleConfirm = () => {
+    let arr = []
+    for (let box of colorBoxes) {
+        arr.push(box.style.backgroundColor)
     }
     phaseColorsArray.push(arr);
     camerWrapper.classList.remove('none')
     acknowledgeWrapper.classList.add('none')
     // console.log(phaseColorsArray,arr);
-    if(imgArr.length === 6)
-        imgName.innerHTML=`Submit Your Collections`
+    if (imgArr.length === 6)
+        imgName.innerHTML = `Submit Your Collections`
 }
 
 // aknowledge api function
-let apiFetchResult = (img) =>{
-    let strColor ;
-    let i=0;
-    // strColor = callApi(img)
-    strColor = 'rbgowwyob';    // for testing purpose
+let apiFetchResult = (img) => {
+    let strColor;
+    let i = 0;
+    if (img === 'manual')
+        strColor = 'rbgowwyob';
+    else {
+        var formdata = new FormData();
+        formdata.append("data", img);
 
+        var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://18.117.76.134:8001/solver/InputStream/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+        // strColor = callApi(img)
+        strColor = 'rbgowwyob';    // for testing purpose
+    }
     camerWrapper.classList.add('none')
-    ackHead.innerHTML = `Acknowledge For ${phase[imgArr.length-1]} Phase`
+    ackHead.innerHTML = `Acknowledge For ${phase[imgArr.length - 1]} Phase`
     acknowledgeWrapper.classList.remove('none')
-    let colorPallet= converStringToColor(strColor)
-    for(let box of colorBoxes){
+    let colorPallet = converStringToColor(strColor)
+    for (let box of colorBoxes) {
         box.style.backgroundColor = colorPallet[i++];
     }
 }
@@ -122,18 +150,30 @@ let storeImage = (image) => {
 
 
 // Save
-let handleSave = () =>{
-    imgArr.push(recentImage); 
+let handleSave = () => {
+    imgArr.push(recentImage);
     apiFetchResult(recentImage)
     phaseImg.classList.add('none');
     videoWrapper.classList.remove('none')
     imgName.innerHTML = `Take Snap of ${phase[imgArr.length]} Phase`
-    
-    setTimeout(()=>{
-     buttonRowUpdation('save') 
-    },0)
+
+    setTimeout(() => {
+        buttonRowUpdation('save')
+    }, 0)
     console.log(imgArr.length)
-    
+
+}
+
+// Manual Uploading
+let handleManual = () => {
+    imgArr.push('manual');
+    apiFetchResult('manual')
+    imgName.innerHTML = `Take Snap of ${phase[imgArr.length]} Phase`
+    setTimeout(() => {
+        buttonRowUpdation('save')
+    }, 0)
+    console.log(imgArr.length)
+
 }
 
 // Retry
@@ -176,6 +216,19 @@ function convertCanvasToImage(canvasPic) {
     storeImage(image);
 }
 
+// uplOad Image
+let uploadImage = () => {
+    var image = URL.createObjectURL(fileImage.files[0]);
+    videoWrapper.classList.add('none')
+    phaseImg.classList.remove('none');
+    phaseImg.setAttribute('src', image)
+    buttonRowUpdation('snap');
+    storeImage(image);
+    fileImage.value = null;
+    document.getElementById('upload_submit').disabled = true;
+    // console.log(image)
+}
+
 // Snap click function
 let handleSnap = () => {
     context.drawImage(video, 104, 24, 432, 432, 0, 0, 432, 432);
@@ -184,4 +237,4 @@ let handleSnap = () => {
 }
 
 
-export { handleCamera, handleSnap, handleBackButton, handleSave, handleRetry ,handleConfirm,handleSubmit};
+export { handleManual, uploadImage, handleCamera, handleSnap, handleBackButton, handleSave, handleRetry, handleConfirm, handleSubmit };

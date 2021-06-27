@@ -8,7 +8,7 @@ import {
     urRotation, drRotation, frRotation, brRotation, lrRotation, rRRotation,
     uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
 } from './rotation'
-import { handleBackButton, handleCamera, handleRetry, handleSnap, handleSave,handleConfirm,handleSubmit } from './phaseImage'
+import { handleBackButton, handleCamera, handleRetry, handleSnap, handleSave,handleConfirm,handleSubmit, uploadImage, handleManual } from './phaseImage'
 
 
 // Canvas
@@ -138,6 +138,8 @@ let reshuffle = document.querySelector('.reshuffle');
 let modal = document.querySelector('.shuffle_modal');
 let back = document.querySelector('.modal_back');
 let retry = document.querySelector('.retry');
+let upload = document.getElementById('upload_submit');
+let manual = document.getElementById('manual');
 
 
 play.addEventListener('click', () => {
@@ -173,6 +175,8 @@ confirm.addEventListener("click", handleConfirm)
 back.addEventListener('click',handleBackButton)
 retry.addEventListener('click',handleRetry)
 submit.addEventListener('click',handleSubmit)
+upload.addEventListener('click',uploadImage)
+manual.addEventListener('click',handleManual)
 
 // draggable color boxes
 let colorBoxes = document.getElementsByClassName('grid-item')
