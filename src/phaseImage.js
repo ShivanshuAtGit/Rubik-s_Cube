@@ -126,7 +126,7 @@ let apiFetchResult = (img) => {
             redirect: 'follow'
         };
 
-        fetch("https://18.117.76.134:8001/solver/InputStream/", requestOptions)
+        fetch("http://18.117.76.134:8001/solver/InputStream/", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
