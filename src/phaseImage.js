@@ -117,19 +117,19 @@ let apiFetchResult = (img) => {
     if (img === 'manual')
         strColor = 'rbgowwyob';
     else {
-        // var formdata = new FormData();
-        // formdata.append("data", img);
+        var formdata = new FormData();
+        formdata.append("data", img);
 
-        // var requestOptions = {
-        //     method: 'POST',
-        //     body: formdata,
-        //     redirect: 'follow'
-        // };
+        var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
 
-        // fetch("https://18.117.76.134:8001/solver/InputStream/", requestOptions)
-        //     .then(response => response.text())
-        //     .then(result => console.log(result))
-        //     .catch(error => console.log('error', error));
+        fetch("https://18.117.76.134:8001/solver/InputStream/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
 
         // strColor = callApi(img)
         strColor = 'rbgowwyob';    // for testing purpose
