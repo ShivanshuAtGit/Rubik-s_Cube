@@ -23,6 +23,8 @@ var imgArr = [];
 var recentImage;
 let phaseColorsArray = []
 let phase = ['Upper', 'Right', 'Front', 'Down', 'Left', 'Back'];
+let solveString = '';
+let solution
 
 // Move Page to Solve
 let renderMovePage = () => {
@@ -66,13 +68,38 @@ let resetImgArr = () => {
     imgName.innerHTML = `Take Snap of ${phase[imgArr.length]} Phase`
     buttonRowUpdation('retry')
     cam.classList.toggle('none')
+    solveString=''
 }
 
 // Submit Click
-let handleSubmit = () => {
+let handleSubmit =async () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    var raw = JSON.stringify({
+      "cube": ""+solveString+""
+    });
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    document.querySelector('.loader_wrapper').classList.remove('none')
+    await fetch("https://therubiksolver.herokuapp.com/solver/solve/", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+          solution = JSON.parse(result).rotation;
+          console.log(solution)
+          document.querySelector('.loader_wrapper').classList.add('none')
+        })
+      .catch(error => console.log('error', error));
+
     imposeColor(phaseColorsArray)     // 1. Impose Color on 3D cube
     resetImgArr();                     // 2. Reset Datastructure and UI
     renderMovePage();                   // 3. Move page to solve cube
+
 }
 
 //  String to Color
@@ -105,17 +132,16 @@ let handleConfirm = () => {
     phaseColorsArray.push(arr);
     camerWrapper.classList.remove('none')
     acknowledgeWrapper.classList.add('none')
-    // console.log(phaseColorsArray,arr);
     if (imgArr.length === 6)
         imgName.innerHTML = `Submit Your Collections`
 }
 
 // aknowledge api function
-let apiFetchResult = (img) => {
+let apiFetchResult =async (img) => {
     let strColor;
     let i = 0;
     if (img === 'manual')
-        strColor = 'rbgowwyob';
+        strColor = 'wwwwwwwww';
     else {
         var formdata = new FormData();
         formdata.append("data", img);
@@ -126,14 +152,25 @@ let apiFetchResult = (img) => {
             redirect: 'follow'
         };
 
-        fetch("https://therubiksolver.herokuapp.com/solver/InputStream/", requestOptions)
+        document.querySelector('.loader_wrapper').classList.remove('none')
+        await fetch("https://therubiksolver.herokuapp.com/solver/InputStream/", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result =>{ 
+                strColor= JSON.parse(result).data
+                document.querySelector('.loader_wrapper').classList.add('none')
+            })
             .catch(error => console.log('error', error));
-
-        // strColor = callApi(img)
-        strColor = 'rbgowwyob';    // for testing purpose
     }
+
+    solveString += strColor;
+    console.log(solveString)
+    // update UI
+    phaseImg.classList.add('none');
+    videoWrapper.classList.remove('none')
+    imgName.innerHTML = `Take Snap of ${phase[imgArr.length]} Phase`
+    buttonRowUpdation('save')
+    console.log(imgArr.length)
+
     camerWrapper.classList.add('none')
     ackHead.innerHTML = `Acknowledge For ${phase[imgArr.length - 1]} Phase`
     acknowledgeWrapper.classList.remove('none')
@@ -153,14 +190,6 @@ let storeImage = (image) => {
 let handleSave = () => {
     imgArr.push(recentImage);
     apiFetchResult(recentImage)
-    phaseImg.classList.add('none');
-    videoWrapper.classList.remove('none')
-    imgName.innerHTML = `Take Snap of ${phase[imgArr.length]} Phase`
-
-    setTimeout(() => {
-        buttonRowUpdation('save')
-    }, 0)
-    console.log(imgArr.length)
 
 }
 
@@ -216,18 +245,41 @@ function convertCanvasToImage(canvasPic) {
     storeImage(image);
 }
 
+// Convert Images to dataUrl
+let convertImagetoDataurl = (input) => {
+    var src, value;
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.addEventListener(
+            "load",
+            function () {
+                var avatarImg = new Image();
+                src = reader.result;
+                avatarImg.src = src;
+                phaseImg.setAttribute('src', src)
+                buttonRowUpdation('snap');
+                storeImage(src);
+            },
+            false
+        );
+        reader.readAsDataURL(input.files[0]);
+    }
+
+}
+
+
 // uplOad Image
 let uploadImage = () => {
-    var image = URL.createObjectURL(fileImage.files[0]);
-    // var img = fileImage.files[0];
+    // var image = new Image();
+    convertImagetoDataurl(fileImage);
+
     videoWrapper.classList.add('none')
     phaseImg.classList.remove('none');
-    phaseImg.setAttribute('src', image)
-    buttonRowUpdation('snap');
-    storeImage(image);
+
+
     fileImage.value = null;
     document.getElementById('upload_submit').disabled = true;
-    // console.log(image,img)
+
 }
 
 // Snap click function
