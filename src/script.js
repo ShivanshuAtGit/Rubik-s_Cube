@@ -9,6 +9,7 @@ import {
     uuRotation, ddRotation, ffRotation, bbRotation, llRotation, rrRotation
 } from './rotation'
 import { handleBackButton, handleCamera, handleRetry, handleSnap, handleSave,handleConfirm,handleSubmit, uploadImage, handleManual } from './phaseImage'
+import { handleSolve } from './solution'
 
 
 // Canvas
@@ -127,6 +128,9 @@ document.querySelectorAll('.button')[17].addEventListener('click', handleDisable
 let page1 = document.querySelector('.page1');
 let page2 = document.querySelector('.page2');
 let page3 = document.querySelector('.page3');
+let solveBtn = document.querySelector('.solve');
+let reshuffleWrapper = document.querySelector('.wrapper_resuffle');
+let solveWrapper = document.querySelector('.wrapper_solve');
 var snap = document.getElementById("snap");
 var save = document.getElementById("save");
 var confirm = document.getElementById("confirm");
@@ -150,7 +154,8 @@ play.addEventListener('click', () => {
 shuffle.addEventListener('click', () => {
     page2.classList.toggle('none')
     page3.classList.toggle('none')
-
+    reshuffleWrapper.classList.remove('none')
+    solveWrapper.classList.add('none')
     modal.classList.toggle('none')
     setTimeout(() => {
         callShuffle();
@@ -177,6 +182,7 @@ retry.addEventListener('click',handleRetry)
 submit.addEventListener('click',handleSubmit)
 upload.addEventListener('click',uploadImage)
 manual.addEventListener('click',handleManual)
+solveBtn.addEventListener('click',handleSolve)
 
 // draggable color boxes
 let colorBoxes = document.getElementsByClassName('grid-item')

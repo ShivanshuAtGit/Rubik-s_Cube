@@ -291,23 +291,22 @@ body
     text-align: center;
 }
 
-/* .page1{
-    
+.solve_guidance{
+    background-color: rgba(255, 255, 255, 0.555);
+    padding: 10px 15px;
+    margin: 5px 0 3px 0;
+    border-radius: 10px;
+    display: inline-block;
 }
-
-.page2{
-
-}
- */
 
  .page3{
      position: relative;
  }
 
+ .solve,
 .reshuffle{
     position: absolute;
     top: 1vh;
-    left: 5%;
     padding: 4px 4px;
     text-align: center;
     font-family: 'Limelight', cursive;
@@ -322,16 +321,26 @@ body
     transition: all 100ms ease-out;
 } 
 
+.left_btn{
+    left: 5%;
+}
+
+.right_btn{
+    right: 5%;
+}
+.solve:focus,
 .reshuffle:focus{
     outline: none;
 }
 
+.solve:hover,
 .reshuffle:hover{
     transform: translateY(-3px) scale(1.02);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.685);
 
 }
 
+.solve:active,
 .reshuffle:active{
     transform: translateY(1px) scale(.99);
     box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.466);
@@ -388,6 +397,22 @@ body
     background-color: rgba(66, 66, 66, 0.233);;
 }
 
+.normal{
+    background-color: rgb(0, 0, 0);
+    box-shadow: 
+        6px 6px 8px 0 rgba(255, 255, 255, 0.3) inset,
+        -6px -6px 8px 0 rgba(0, 0, 0, .25) inset;
+    color: white;
+}
+
+.highlight{
+    background-color: rgb(8, 255, 193);
+    box-shadow: 
+        6px 6px 8px 0 rgba(8, 255, 193, 0.212) inset,
+        -6px -6px 8px 0 rgba(1, 65, 49, 0.219) inset;
+    color: black;
+}
+
 .button{
     margin: .2rem;
     text-align: center;
@@ -396,11 +421,6 @@ body
     font-family: 'Limelight', cursive;
     border-radius: 1rem;
     border: none;
-    background-color: rgb(0, 0, 0);
-    box-shadow: 
-        6px 6px 8px 0 rgba(255, 255, 255, 0.3) inset,
-        -6px -6px 8px 0 rgba(0, 0, 0, .25) inset;
-    color: white;
     text-shadow: 0 0 1rem white;
     transition: all 100ms ease-out;
 }

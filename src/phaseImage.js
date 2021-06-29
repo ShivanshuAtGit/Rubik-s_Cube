@@ -1,8 +1,11 @@
 import { imposeColor } from "./phaseColors";
+import { passSolution } from "./solution";
 
 let page1 = document.querySelector('.page1');
 let page2 = document.querySelector('.page2');
 let page3 = document.querySelector('.page3');
+let reshuffleWrapper = document.querySelector('.wrapper_resuffle');
+let solveWrapper = document.querySelector('.wrapper_solve');
 var video = document.getElementById('video');
 let videoWrapper = document.querySelector('.video_wrapper')
 var canvasPic = document.getElementById('canvasPic');
@@ -31,6 +34,8 @@ let renderMovePage = () => {
     page1.classList.add('none');
     page2.classList.add('none');
     page3.classList.remove('none');
+    reshuffleWrapper.classList.add('none')
+    solveWrapper.classList.remove('none')
 }
 
 
@@ -72,7 +77,7 @@ let resetImgArr = () => {
 }
 
 // Submit Click
-let handleSubmit =async () => {
+let handleSubmit = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     
@@ -91,7 +96,7 @@ let handleSubmit =async () => {
       .then(response => response.text())
       .then(result => {
           solution = JSON.parse(result).rotation;
-          console.log(solution)
+          passSolution(solution)
           document.querySelector('.loader_wrapper').classList.add('none')
         })
       .catch(error => console.log('error', error));
